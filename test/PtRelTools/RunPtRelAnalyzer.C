@@ -20,6 +20,20 @@ void ExecEventCounter(TString DataType) {
 
 }
 
+void ExecComputeBTaggingWorkingPoints(TString AlgorithmName) {
+
+  cout << "ExecComputeBTaggingWorkingPoints " << AlgorithmName << endl; 
+
+  bool RemovePileUpJets = (AlgorithmName.Contains("RemovePU")) ? true : false;
+  AlgorithmName.ReplaceAll("RemovePU", "");
+
+  bool ApplyPileUpReweighting = (AlgorithmName.Contains("ReweightPU")) ? true : false;
+  AlgorithmName.ReplaceAll("ReweightPU", "");
+
+  ptRelAna->ComputeBTaggingWorkingPoints(AlgorithmName, RemovePileUpJets, ApplyPileUpReweighting);
+
+}
+
 void ExecComputePileUpWeights(TString Operation, int DataRange) {
 
   cout << "ExecComputePileUpWeights " << Operation << " " << DataRange << endl; 
@@ -126,7 +140,7 @@ void ExecComputeKinematicWeights(TString DataType) {
 
       if (TemplateVariable=="PtRel") {
 
-	TString AddTrackTemplates = (TrackTemplates.Contains("All")) ? "All" : "";
+	TString AddTrackTemplates = (DataType.Contains("All")) ? "All" : "";
 	if (DataType.Contains("QCDMu")) ptRelAna->ComputeKinematicWeights(SystematicName[is], "QCDMu", AddTrackTemplates); 
 	if (DataType.Contains("JetHT")) ptRelAna->ComputeKinematicWeights(SystematicName[is], "JetHT",             "All"); 
 	if (DataType.Contains( "QCDX")) ptRelAna->ComputeKinematicWeights(SystematicName[is],   "QCD",             "All"); 
@@ -173,10 +187,10 @@ void ExecComputePtRelScaleFactors(TString Parameters = "CSVv2:_Central:") {
   TString FitOption = Parameters;
   FitOption.ReplaceAll(TaggerList + ":" + SystFit + ":", "");
 
-  TString PlotOption = "pngpdf";
+  TString PlotOption = "png";
   TString PtBinList = "All";
   TString EtaBinFlag = "anyEta";
-  TString TemplateFlag = (FitOption.Contains("_LightTemplatesRatio")) ? "All" : "";
+  TString TemplateFlag = (FitOption.Contains("_LightTemplatesRatio")) ? "All" : "All";
 
   if (SystFit=="_All") {
 
@@ -209,10 +223,30 @@ void ExecPlotBTagPerformance(TString Dependence) {
     TString ConfigurationList[2] = {"_PSICHEP2016_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
     TString SystematicList[2] = {"_Central", "-"};
 
-  } // else if ...
+    for (int tg = 0; tg<nTaggers; tg++) 
+      ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics);//, "ScaleFactors");
 
-  for (int tg = 0; tg<nTaggers; tg++) 
-    ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics);//, "ScaleFactors");
+  } else if (Dependence=="FitOption") {
+
+    TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[6] = {"_Central_TCF", /*"_Central_LightTemplatesRatio", "_Central_cJets", "_Central_bTempRatioCorr",*/
+				 "_Central_LightTemplatesRatio_cJets_TCF" , "_Central_LightTemplatesRatio_bTempRatioCorr_TCF", 
+				   "_Central_cJets_bTempRatioCorr_TCF", "_Central_LightTemplatesRatio_cJets_bTempRatioCorr_TCF", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg]=="DeepCSVM")
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  }else if (Dependence=="Moriond18") {
+
+    TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("DeepCSV"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  }
   
 }
 
@@ -351,6 +385,9 @@ void RunPtRelAnalyzer() {
 
   if (Macro.Contains("EventCounter"))
     ExecEventCounter(Macro.ReplaceAll("EventCounter", "")); 
+
+  if (Macro.Contains("ComputeBTaggingWorkingPoints"))
+    ExecComputeBTaggingWorkingPoints(Macro.ReplaceAll("ComputeBTaggingWorkingPoints", "")); 
 
   if (Macro.Contains("ComputePileUpWeights"))
     ExecComputePileUpWeights(Macro.ReplaceAll("ComputePileUpWeights", ""), DataRange);

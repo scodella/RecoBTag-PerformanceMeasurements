@@ -1,13 +1,13 @@
-TString CampaignLuminosity = "36.5 fb^{-1} (13 TeV)";
-TString CampaignName       = "Moriond17";
+TString CampaignLuminosity = "41.9 fb^{-1} (13 TeV)";
+TString CampaignName       = "Moriond18";
 
 TString JECVersionData = "Spring16_25nsV10F";
 TString JECVersionMC   = "Spring16_25nsV10";
 
 // Eta bins
 const int nPtRelEtaBins = 3;
-TString PtRelEtaBin[nPtRelEtaBins] = {"anyEta", "Eta12", "Eta24"};
-double PtRelEtaEdge[nPtRelEtaBins] = {0., 1.2, 2.4};
+TString PtRelEtaBin[nPtRelEtaBins] = {"anyEta", "Eta12", "Eta25"};
+double PtRelEtaEdge[nPtRelEtaBins] = {0., 1.2, 2.5};
 
 // Pt bins
 const int nPtRelPtBins = 20;
@@ -17,6 +17,6 @@ const int MaxPtRelPtEdge =  1400;
 
 double MuonPtCut[nPtRelPtBins] = {5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5.};
 
-const int nMaxPU = 75;
-const int nMaxPrescales = 4700;
+const int nMaxPU = 99;
+const int nMaxPrescales = 6000;
 

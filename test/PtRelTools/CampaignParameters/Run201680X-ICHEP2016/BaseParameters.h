@@ -1,4 +1,5 @@
 TString CampaignLuminosity = "7.65 fb^{-1} (13 TeV)";
+TString CampaignName       = "ICHEP2016";
 
 TString JECVersionData = "Spring16_25nsV6";
 TString JECVersionMC   = "Spring16_25nsV6";

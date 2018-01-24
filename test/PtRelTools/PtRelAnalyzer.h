@@ -4,14 +4,14 @@
 #include "TString.h"
 #include "TFile.h"
 
-#include "CampaignParameters/Run201680X-ICHEP2016/BaseParameters.h"
-#include "CampaignParameters/Run201680X-ICHEP2016/TriggerInfo.h"
-#include "CampaignParameters/Run201680X-ICHEP2016/Taggers.h"
-#include "CampaignParameters/Run201680X-ICHEP2016/Systematics.h"
+#include "CampaignParameters/Run201794X-Moriond18/BaseParameters.h"
+#include "CampaignParameters/Run201794X-Moriond18/TriggerInfo.h"
+#include "CampaignParameters/Run201794X-Moriond18/Taggers.h"
+#include "CampaignParameters/Run201794X-Moriond18/Systematics.h"
 
 // Choose the production 
-#include "CampaignParameters/Run201680X-ICHEP2016/BaseProduction.h"
-//#include "CampaignParameters/Run201680X/Run2015BProduction.h"
+//#include "CampaignParameters/Run201794X-Moriond18/BaseProduction.h"
+#include "CampaignParameters/Run201794X-Moriond18/Run2016Production.h"
   
 float TotalScaleFactorSystematic[nFitPtBins][nPtRelEtaBins];
 float ScaleFactorSystematic[nFitPtBins][nPtRelEtaBins][nScaleFactorSystematics];
@@ -71,10 +71,14 @@ class PtRelAnalyzer {
   void ComputeMethodsOverlap();
 
   void ComputeBTaggingEfficiency(TString DataType, int DataRange = -1);
+
+  void ComputeBTaggingWorkingPoints(TString AlgorithmName, bool RemovePileUpJets = false, bool ApplyPileUpReweighting = false);
  
  private:
 
   TString TemplateVariable, PUWeighting, KinWeighting, Selection;
+
+  bool NormalizeDataToEntries;
 
   int nBinsForTemp, TemplateRebinning;
   float LowerEdgeForTemp, UpperEdgeForTemp;

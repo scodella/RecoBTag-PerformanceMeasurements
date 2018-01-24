@@ -7,8 +7,8 @@
 #include <fstream>
 #include <iostream>
 
-#include "BTagAnalyzerUtilities/Ntuples/RunIISpring16MiniAODv2-80X.h"
-#include "BTagAnalyzerUtilities/Taggers/RunIISpring16MiniAODv2-80X.h"
+#include "BTagAnalyzerUtilities/Ntuples/RunIIFall17MiniAOD-94X.h"
+#include "BTagAnalyzerUtilities/Taggers/RunIIFall17MiniAOD-94X.h"
 
 int Run, Evt, nPU, nPV, nTrkInc, nBHadrons, nDHadrons, nGenlep, nGenquark, nBitTrigger;
 int BitTrigger[100], Jet_flavour[50], Jet_nFirstTrkInc[50], Jet_nLastTrkInc[50], Muon_IdxJet[50]; 
@@ -20,7 +20,7 @@ int FatJet_looseID[50], FatJet_nSubJets[50], FatJet_FirstSubJet[50], FatJet_Last
 int nJet, Jet_looseID[50], Jet_nbHadrons[50];
 float Jet_pt[50], Jet_genpt[50], Jet_eta[50], Jet_phi[50], Jet_Ip1P[50], Jet_Ip2P[50], Jet_Ip3P[50], Jet_Ip3N[50], Jet_jes[50];
 float Jet_Svx[50], Jet_SvxHP[50], Jet_Proba[50], Jet_ProbaP[50], Jet_ProbaN[50], Jet_Bprob[50], Jet_CombSvxP[50], Jet_CombSvxN[50], Jet_CombSvx[50];
-float Jet_SimpIVF_HE[50], Jet_SimpIVF_HP[50], Jet_CombIVF[50], Jet_CombIVF_P[50], Jet_cMVAv2[50], Jet_residual[50];
+float Jet_SimpIVF_HE[50], Jet_SimpIVF_HP[50], Jet_CombIVF[50], Jet_CombIVF_P[50], Jet_cMVAv2[50], Jet_residual[50], Jet_DeepCSVBDisc[50], Jet_DeepFlavourBDisc[50];
 float Jet_RetCombSvxP[50], Jet_RetCombSvxN[50], Jet_RetCombSvx[50], Jet_CombCSVJP_P[50], Jet_CombCSVJP_N[50], Jet_CombCSVJP[50];
 float Jet_CombCSVJPSL_P[50], Jet_CombCSVJPSL_N[50], Jet_CombCSVJPSL[50], Jet_CombCSVSL_P[50], Jet_CombCSVSL_N[50], Jet_CombCSVSL[50];
 float Jet_SoftMu[50], Jet_SoftMuP[50], Jet_SoftMuN[50], Jet_SoftEl[50], Jet_SoftElP[50], Jet_SoftElN[50];
@@ -40,7 +40,7 @@ int ncQuarks, nbQuarks;
 float cQuark_eta[50], cQuark_phi[50], bQuark_eta[50], bQuark_phi[50];
 int cQuark_status[50], cQuark_pdgID[50], bQuark_status[50], bQuark_pdgID[50], cQuark_fromGSP[50], bQuark_fromGSP[50];
 int nStdJet, StdJet_flavour[50];
-float StdJet_pt[50], StdJet_eta[50], StdJet_phi[50], StdJet_Proba[50], StdJet_Bprob[50], StdJet_CombIVF[50], StdJet_cMVAv2[50];
+float StdJet_pt[50], StdJet_eta[50], StdJet_phi[50], StdJet_Proba[50], StdJet_Bprob[50], StdJet_CombIVF[50], StdJet_cMVAv2[50], StdJet_DeepCSVBDisc[50], StdJet_DeepFlavourBDisc[50];
 
 TTree *GetChain(TFile *ThisTree, bool ReadLightTracks = false, TString TreeName = "btagana", bool ReadOnlyEventInfo = false) {
 
@@ -112,6 +112,8 @@ TTree *GetChain(TFile *ThisTree, bool ReadLightTracks = false, TString TreeName 
     tchain->SetBranchAddress(SubjetType + ".Jet_CombIVF", Jet_CombIVF);
     tchain->SetBranchAddress(SubjetType + ".Jet_CombIVF_P", Jet_CombIVF_P);
     tchain->SetBranchAddress(SubjetType + ".Jet_cMVAv2", Jet_cMVAv2);
+    tchain->SetBranchAddress(SubjetType + ".Jet_DeepCSVBDisc", Jet_DeepCSVBDisc);
+    tchain->SetBranchAddress(SubjetType + ".Jet_DeepFlavourBDisc", Jet_DeepFlavourBDisc);
     tchain->SetBranchAddress(SubjetType + ".Jet_nseltracks", Jet_nseltracks);
     if (ReadLightTracks) tchain->SetBranchAddress("Jet_nFirstTrkInc", Jet_nFirstTrkInc);
     if (ReadLightTracks) tchain->SetBranchAddress("Jet_nLastTrkInc", Jet_nLastTrkInc);
@@ -191,6 +193,8 @@ TTree *GetChain(TFile *ThisTree, bool ReadLightTracks = false, TString TreeName 
       tchain->SetBranchAddress("Jet_CombIVF", Jet_CombIVF);
       tchain->SetBranchAddress("Jet_CombIVF_P", Jet_CombIVF_P);
       tchain->SetBranchAddress("Jet_cMVAv2", Jet_cMVAv2);
+      tchain->SetBranchAddress("Jet_DeepCSVBDisc", Jet_DeepCSVBDisc);
+      tchain->SetBranchAddress("Jet_DeepFlavourBDisc", Jet_DeepFlavourBDisc);
       //tchain->SetBranchAddress("Jet_VtxCat", Jet_VtxCat);
       if (ReadLightTracks) tchain->SetBranchAddress("Jet_nFirstTrkInc", Jet_nFirstTrkInc);
       if (ReadLightTracks) tchain->SetBranchAddress("Jet_nLastTrkInc", Jet_nLastTrkInc);
@@ -250,6 +254,8 @@ TTree *GetChain(TFile *ThisTree, bool ReadLightTracks = false, TString TreeName 
       tchain->SetBranchAddress("Jet_BprobP",StdJet_Bprob);
       tchain->SetBranchAddress("Jet_CombIVF", StdJet_CombIVF);
       tchain->SetBranchAddress("Jet_cMVAv2", StdJet_cMVAv2);
+      tchain->SetBranchAddress("Jet_DeepCSVBDisc", StdJet_DeepCSVBDisc);
+      tchain->SetBranchAddress("Jet_DeepFlavourBDisc", StdJet_DeepFlavourBDisc);
 
     }
 
@@ -429,6 +435,38 @@ double DeltaR(double eta1, double phi1, double eta2, double phi2) {
   
 }
 
+double GetBTagDiscriminatorValue(int ijet, TString AlgorithmName, TString JetType = "Default") {
+
+  if (JetType=="Default") {
+    
+    if (AlgorithmName.Contains("JBP"))            return Jet_Bprob[ijet];
+    if (AlgorithmName.Contains("JP"))             return Jet_Proba[ijet]; 
+    if (AlgorithmName.Contains("CSVv2"))          return Jet_CombIVF[ijet];  
+    if (AlgorithmName.Contains("CMVAv2"))         return Jet_cMVAv2[ijet];  
+    if (AlgorithmName.Contains("cMVAv2"))         return Jet_cMVAv2[ijet]; 
+    if (AlgorithmName.Contains("TCHP"))           return Jet_Ip3P[ijet];
+    if (AlgorithmName.Contains("TCHE"))           return Jet_Ip2P[ijet];
+    if (AlgorithmName.Contains("DeepCSV"))        return Jet_DeepCSVBDisc[ijet];
+    if (AlgorithmName.Contains("DeepFlavour"))    return Jet_DeepFlavourBDisc[ijet];
+    if (AlgorithmName.Contains("CSV"))            return Jet_CombSvx[ijet];
+    if (AlgorithmName.Contains("SSVHE"))          return Jet_Svx[ijet];
+
+  } else if (JetType=="Standard") {
+
+    if (AlgorithmName.Contains("JBP"))           return StdJet_Bprob[ijet];
+    if (AlgorithmName.Contains("JP"))            return StdJet_Proba[ijet]; 
+    if (AlgorithmName.Contains("CSVv2"))         return StdJet_CombIVF[ijet];
+    if (AlgorithmName.Contains("cMVAv2"))        return StdJet_cMVAv2[ijet];
+    if (AlgorithmName.Contains("CMVAv2"))        return StdJet_cMVAv2[ijet];
+    if (AlgorithmName.Contains("DeepCSV"))       return StdJet_DeepCSVBDisc[ijet];
+    if (AlgorithmName.Contains("DeepFlavour"))   return StdJet_DeepFlavourBDisc[ijet];
+    
+  } 
+  
+  return -9999.;
+
+}
+
 bool IsTaggedJet(int ijet, TString ThisTaggerName, TString JetType = "Default") {
 
   if (ThisTaggerName=="NONE") 
@@ -445,41 +483,9 @@ bool IsTaggedJet(int ijet, TString ThisTaggerName, TString JetType = "Default") 
   if (ThisDiscriminatorCut==-1)
     std::cout << "Wrong discriminator cut " << ThisTaggerName << std::endl;
 
-  double ThisDiscriminatorValue = -1;
+  double ThisDiscriminatorValue = GetBTagDiscriminatorValue(ijet, ThisTaggerName, JetType);
 
-  if (JetType=="Default") {
-
-    if (ThisTaggerName.Contains("JBP"))
-      ThisDiscriminatorValue = Jet_Bprob[ijet];
-    else if (ThisTaggerName.Contains("JP"))
-      ThisDiscriminatorValue = Jet_Proba[ijet]; 
-    else if (ThisTaggerName.Contains("CSVv2"))
-      ThisDiscriminatorValue = Jet_CombIVF[ijet];  
-    else if (ThisTaggerName.Contains("CMVAv2"))
-      ThisDiscriminatorValue = Jet_cMVAv2[ijet]; 
-    else if (ThisTaggerName.Contains("TCHP")) 
-      ThisDiscriminatorValue = Jet_Ip3P[ijet];
-    else if (ThisTaggerName.Contains("TCHE")) 
-      ThisDiscriminatorValue = Jet_Ip2P[ijet];
-    else if (ThisTaggerName.Contains("CSV"))
-      ThisDiscriminatorValue = Jet_CombSvx[ijet];
-    else if (ThisTaggerName.Contains("SSVHE"))
-      ThisDiscriminatorValue = Jet_Svx[ijet];
-
-  } else if (JetType=="Standard") {
-
-    if (ThisTaggerName.Contains("JBP"))
-      ThisDiscriminatorValue = StdJet_Bprob[ijet];
-    else if (ThisTaggerName.Contains("JP"))
-      ThisDiscriminatorValue = StdJet_Proba[ijet]; 
-    else if (ThisTaggerName.Contains("CSVv2"))
-      ThisDiscriminatorValue = StdJet_CombIVF[ijet];
-    else if (ThisTaggerName.Contains("cMVAv2"))
-      ThisDiscriminatorValue = StdJet_cMVAv2[ijet];
-
-  } 
-
-  if (ThisDiscriminatorValue==-1)
+  if (ThisDiscriminatorValue==-9999.)
     std::cout << "Wrong discriminator value " << ThisTaggerName << std::endl;
 
   return ThisDiscriminatorValue>ThisDiscriminatorCut;
@@ -761,7 +767,7 @@ int IsMuonJet(int ijet, bool TightMuon = true) {
 
 }
 
-bool PassTriggerBit(TString ThisCode) {
+bool PassTriggerBit(TString ThisCode, TString CampaignName) {
 
   if (ThisCode=="NONE") return true;
 
@@ -773,29 +779,62 @@ bool PassTriggerBit(TString ThisCode) {
   }
 
   int triggerIdx = -1;
+
+  if (CampaignName=="ICHEP2016") {
  
-  if (ThisCode=="_DiJet20X") triggerIdx =   2;
-  if (ThisCode=="_DiJet40X") triggerIdx =   3;
-  if (ThisCode=="_Jet30_v")  triggerIdx =   1;
-  if (ThisCode=="_Jet60_v")  triggerIdx =   4;
-  if (ThisCode=="_Jet110_v") triggerIdx =   9;
-  if (ThisCode=="_Jet300_v") triggerIdx =  18;
-  if (ThisCode=="_PFJet40")  triggerIdx =   2;
-  if (ThisCode=="_PFJet60")  triggerIdx =  87;
-  if (ThisCode=="_PFJet80")  triggerIdx =   7;
-  if (ThisCode=="_PFJet140") triggerIdx =  12;
-  if (ThisCode=="_PFJet200") triggerIdx =  15;
-  if (ThisCode=="_PFJet260") triggerIdx =  17;
-  if (ThisCode=="_PFJet320") triggerIdx =  19;
-  if (ThisCode=="_PFJet400") triggerIdx =  21;
-  if (ThisCode=="_PFJet60")  triggerIdx =  87;
-  if (ThisCode=="_PFJet450") triggerIdx =  88;
-  if (ThisCode=="_PFJet500") triggerIdx =  89;
-  if (ThisCode=="_DiJet20")  triggerIdx =  35;
-  if (ThisCode=="_DiJet40")  triggerIdx =  41;
-  if (ThisCode=="_DiJet70")  triggerIdx =  44;
-  if (ThisCode=="_DiJet110") triggerIdx =  47;
-  if (ThisCode=="_Jet300")   triggerIdx =  50; // 18 only for 7 TeV data
+    if (ThisCode=="_DiJet20X") triggerIdx =   2;
+    if (ThisCode=="_DiJet40X") triggerIdx =   3;
+    if (ThisCode=="_Jet30_v")  triggerIdx =   1;
+    if (ThisCode=="_Jet60_v")  triggerIdx =   4;
+    if (ThisCode=="_Jet110_v") triggerIdx =   9;
+    if (ThisCode=="_Jet300_v") triggerIdx =  18;
+    if (ThisCode=="_PFJet40")  triggerIdx =   2;
+    if (ThisCode=="_PFJet60")  triggerIdx =  87;
+    if (ThisCode=="_PFJet80")  triggerIdx =   7;
+    if (ThisCode=="_PFJet140") triggerIdx =  12;
+    if (ThisCode=="_PFJet200") triggerIdx =  15;
+    if (ThisCode=="_PFJet260") triggerIdx =  17;
+    if (ThisCode=="_PFJet320") triggerIdx =  19;
+    if (ThisCode=="_PFJet400") triggerIdx =  21;
+    if (ThisCode=="_PFJet60")  triggerIdx =  87;
+    if (ThisCode=="_PFJet450") triggerIdx =  88;
+    if (ThisCode=="_PFJet500") triggerIdx =  89;
+    if (ThisCode=="_DiJet20")  triggerIdx =  35;
+    if (ThisCode=="_DiJet40")  triggerIdx =  41;
+    if (ThisCode=="_DiJet70")  triggerIdx =  44;
+    if (ThisCode=="_DiJet110") triggerIdx =  47;
+    if (ThisCode=="_Jet300")   triggerIdx =  50; // 18 only for 7 TeV data
+
+  } else if (CampaignName=="Moriond17") {
+
+    if (ThisCode=="_DiJet20")  triggerIdx =  30;
+    if (ThisCode=="_DiJet40")  triggerIdx =  31;
+    if (ThisCode=="_DiJet70")  triggerIdx =  32;
+    if (ThisCode=="_DiJet110") triggerIdx =  33;
+    if (ThisCode=="_DiJet170") triggerIdx =  34;
+    if (ThisCode=="_Jet300")   triggerIdx =  35;
+    
+    if (ThisCode=="_PFJet40")  triggerIdx =   0;
+    if (ThisCode=="_PFJet60")  triggerIdx =   1;
+    if (ThisCode=="_PFJet80")  triggerIdx =   2;
+    if (ThisCode=="_PFJet260") triggerIdx =   5;
+    
+  } else if (CampaignName=="Moriond18") {
+
+    if (ThisCode=="_DiJet20")  triggerIdx =  32;
+    if (ThisCode=="_DiJet40")  triggerIdx =  33;
+    if (ThisCode=="_DiJet70")  triggerIdx =  34;
+    if (ThisCode=="_DiJet110") triggerIdx =  35;
+    if (ThisCode=="_DiJet170") triggerIdx =  36;
+    if (ThisCode=="_Jet300")   triggerIdx =  37;
+    
+    if (ThisCode=="_PFJet40")  triggerIdx =   0;
+    if (ThisCode=="_PFJet60")  triggerIdx =   1;
+    if (ThisCode=="_PFJet80")  triggerIdx =   2;
+    if (ThisCode=="_PFJet140") triggerIdx =   3;
+    if (ThisCode=="_PFJet260") triggerIdx =   5;
+    
+  } 
 
   if (triggerIdx==-1) {
     
@@ -1193,7 +1232,6 @@ double DeltaRfromPtRel(double pt_rel, double pt_trk, double eta_jet, double phi_
   return DeltaR(eta_jet, phi_jet, eta_trk, TrkPhi);
 
 }
-
 int GetBHadron(int ijet, float DRCut = 0.5) {
 
   int iBHadron = -1;
