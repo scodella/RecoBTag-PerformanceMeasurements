@@ -1,15 +1,15 @@
 // EOS paths 
-TString EOSPathQCD       = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1/MC/QCD_TuneCP5_13TeV_pythia8_RunIIFall17MiniAOD_94X_mc2017_realistic_v10/";
-TString EOSPathQCDMu     = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10/";
-TString EOSPathBTagMu    = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1/Data/BTagMu/";
-TString EOSPathJetHT     = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1/Data/JetHT/";
+TString EOSPathQCD       = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1_JEC/MC/QCD_TuneCP5_13TeV_pythia8_RunIIFall17MiniAOD_94X_mc2017_realistic_v10/";
+TString EOSPathQCDMu     = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1_JEC/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10/";
+TString EOSPathBTagMu    = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1_JEC/Data/BTagMu/";
+TString EOSPathJetHT     = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/CMSSW_9_4_1_JEC/Data/JetHT/";
 
 TString TreeContentFlag = "_FatJets_Subjets";
 
 // BTag data
 const int nBTagMuRanges = 7;
 TString BTagMuRangeName[nBTagMuRanges] = {"BTagMu_Run2017B_17Nov2017-v1", "BTagMu_Run2017C_17Nov2017-v1:1of2", "BTagMu_Run2017C_17Nov2017-v1:2of2", "BTagMu_Run2017D_17Nov2017-v1", "BTagMu_Run2017E_17Nov2017-v1", "BTagMu_Run2017F_17Nov2017-v1:1of2", "BTagMu_Run2017F_17Nov2017-v1:2of2"};
-int nBTagMuTrees[nBTagMuRanges] = {244, 525, 525, 274, 285, 464, 464};
+int nBTagMuTrees[nBTagMuRanges] = {242, 519, 519, 271, 429, 594, 594};
 
 // Jet data
 const int nJetRunRanges = 15;
@@ -18,21 +18,21 @@ TString JetRunRangeName[nJetRunRanges] = {"JetHT_Run2017B_17Nov2017-v1:1of2", "J
 					  "JetHT_Run2017D_17Nov2017-v1:1of2", "JetHT_Run2017D_17Nov2017-v1:2of2", 
 					  "JetHT_Run2017E_17Nov2017-v1:1of3", "JetHT_Run2017E_17Nov2017-v1:2of3", "JetHT_Run2017E_17Nov2017-v1:3of3", 
 					  "JetHT_Run2017F_17Nov2017-v1:1of4", "JetHT_Run2017F_17Nov2017-v1:2of4", "JetHT_Run2017F_17Nov2017-v1:3of4", "JetHT_Run2017F_17Nov2017-v1:4of4"};
-int nJetTrees[nJetRunRanges]    = {242, 242, 531, 531, 531, 531, 271, 271, 435, 435, 435, 591, 591, 591, 591};
+int nJetTrees[nJetRunRanges]    = {242, 242, 519, 519, 519, 519, 271, 271, 429, 429, 429, 585, 585, 585, 585};
 
 const int nMonteCarloPtHatRanges = 13;
 TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = {    "Pt-15to20",      "Pt-20to30",       "Pt-30to50",       "Pt-50to80",       "Pt-80to120",   "Pt-120to170",   "Pt-170to300:1of2",   "Pt-170to300:2of2",             "Pt-300to470", "Pt-470to600",    "Pt-600to800",          "Pt-800to1000",     "Pt-1000toInf"};
 double CrossSection[nMonteCarloPtHatRanges]          = {1.27319E9*0.003, 5.58528E8*0.0053, 1.39803E8*0.01182, 1.92225E7*0.02276, 2.758420E6*0.03844, 469797.*0.05362, 117989.*0.07335, 117989.*0.07335,         7820.25*0.10196,        645.528*0.12242,   187.109*0.13412,         32.3486*0.14552,       10.4305*0.15544};
-double GeneratedEvents[nMonteCarloPtHatRanges]       = {5748924, 27932241, 28592087, 21074359, 23028753, 20177642, 46227426, 11174145, 1023477, 3658286, 7572383, 7404958};
-int nMonteCarloTrees[nMonteCarloPtHatRanges]         = {120, 414, 488, 288, 351, 377, 797, 797, 202, 406, 69, 169, 180};
+double GeneratedEvents[nMonteCarloPtHatRanges]       = {5748924, 28006217, 28667784, 23955178, 23098419, 20821529, 46438674, 46438674, 17620456, 18852127, 16392140, 15694987, 11464778};
+int nMonteCarloTrees[nMonteCarloPtHatRanges]         = {120, 414, 488, 323, 351, 377, 796, 796, 309, 446, 314, 361, 268};
 
 
 // QCD inclusive 13 TeV 
-const int nMCInclusivePtHatRanges = 15;                                       
-TString MCInclusivePtHatRange[nMCInclusivePtHatRanges] = {"Pt-15to30", "Pt-30to50", "Pt-50to80",    "Pt-80to120", "Pt-120to170", "Pt-170to300",  "Pt-300to470", "Pt-470to600", "Pt-600to800", "Pt-800to1000", "Pt-1000to1400", "Pt-1400to1800", "Pt-1800to2400", "Pt-2400to3200", "Pt-3200toInf"};
-double CrossSectionInclusive[nMCInclusivePtHatRanges]  = {  1.83741E9,   1.40932E8,   1.92043E7,        2762530.,       471100.,       117276.,          7823.,         648.2,         186.9,         32.293,          9.4183,         0.84265,        0.114943,      0.00682981,    0.000165445};
-double GeneratedEventsInclusive[nMCInclusivePtHatRanges] = {19792480, 19731387, 16260363, 28780949, 24746121, 29791318, 23834796, 26384434, 35796318, 30253528, 19465166, 0, 0, 0, 0};
-int nMCInclusiveTrees[nMCInclusivePtHatRanges]           = {289, 260, 215, 420, 432, 478, 452, 575, 662, 590, 348, 0, 0, 0, 0};
+const int nMCInclusivePtHatRanges = 18;                                       
+TString MCInclusivePtHatRange[nMCInclusivePtHatRanges] = {"Pt-15to30", "Pt-30to50", "Pt-50to80",    "Pt-80to120", "Pt-120to170", "Pt-170to300",  "Pt-300to470:1of2",  "Pt-300to470:2of2", "Pt-470to600", "Pt-600to800:1of2", "Pt-600to800:2of2", "Pt-800to1000:1of2", "Pt-800to1000:2of2", "Pt-1000to1400", "Pt-1400to1800", "Pt-1800to2400", "Pt-2400to3200", "Pt-3200toInf"};
+double CrossSectionInclusive[nMCInclusivePtHatRanges]  = {  1.83741E9,   1.40932E8,   1.92043E7,        2762530.,       471100.,       117276.,          7823.,          7823.,         648.2,         186.9,         186.9,         32.293,          32.293,          9.4183,         0.84265,        0.114943,      0.00682981,    0.000165445};
+double GeneratedEventsInclusive[nMCInclusivePtHatRanges] = {19792480, 19731387, 19220164, 28805397, 26886589, 29791318, 53526514, 53526514, 26479680, 66396504, 66396504, 37671608, 37671608, 19571272, 0, 0, 0, 0};
+int nMCInclusiveTrees[nMCInclusivePtHatRanges]           = {289, 260, 254, 420, 469, 478, 1011, 1011, 578, 1150, 1150, 732, 732, 348, 0, 0, 0, 0};
 
 // https://github.com/cms-sw/cmssw/blob/CMSSW_9_4_X/SimGeneral/MixingModule/python/mix_2017_25ns_WinterMC_PUScenarioV1_PoissonOOTPU_cfi.py
 float PileUpScenario[] = { 3.39597497605e-05,
