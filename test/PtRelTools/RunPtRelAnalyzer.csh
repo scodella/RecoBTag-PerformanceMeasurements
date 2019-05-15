@@ -8,7 +8,7 @@ setenv TEMPLATEVARIABLE 'PtRel'
 #setenv TEMPLATEVARIABLE 'System8' 
 
 #setenv PUWEIGHTING ''
-setenv PUWEIGHTING '_PSRun2018Prompt18'
+setenv PUWEIGHTING '_PSRun20182018Ultimate'
 
 #setenv KINWEIGHTING ''
 #setenv KINWEIGHTING '_KinPtBinsCentral'
