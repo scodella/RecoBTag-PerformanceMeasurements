@@ -1,6 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 ttbarselectionproducer = cms.EDProducer("TTbarSelectionProducer",
+                                        selectAll        = cms.bool(False),
                                         verbose          = cms.int32(0),
                                         triggerColl      = cms.InputTag("TriggerResults","","HLT"),
                                         prunedGenParticles       = cms.InputTag('prunedGenParticles'),
@@ -17,7 +18,8 @@ ttbarselectionproducer = cms.EDProducer("TTbarSelectionProducer",
                                                                        '_IsoMu22_v',
                                                                        '_IsoMu24_v',    
                                                                        'Ele35_WPLoose_Gsf_v',   
-                                                                       'Ele45_WPLoose_Gsf_v'
+                                                                       'Ele45_WPLoose_Gsf_v',
+                                                                       'HLT_Mu50_v'
                                                                        ),
                                         trigChannels     = cms.vint32(13*11,
                                                                       13*11,
@@ -26,12 +28,13 @@ ttbarselectionproducer = cms.EDProducer("TTbarSelectionProducer",
                                                                       13,
                                                                       13,
                                                                       11,
-                                                                      11
+                                                                      11,
+                                                                      13
                                                                       ),
                                         doTrigSel        = cms.bool(True),
                                         electronColl     = cms.InputTag("slimmedElectrons"),
                                         conversions      = cms.InputTag("reducedEgamma:reducedConversions"),
-                                        electronIdMap    = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-Preliminary-medium"),
+                                        electronIdMap    = cms.InputTag("egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-medium"),
                                         electron_cut_pt  = cms.double(20),
                                         electron_cut_eta = cms.double(2.4),
                                         electron_cut_iso = cms.double(0.11),
