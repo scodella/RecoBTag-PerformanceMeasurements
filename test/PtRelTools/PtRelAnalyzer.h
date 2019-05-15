@@ -4,14 +4,14 @@
 #include "TString.h"
 #include "TFile.h"
 
-#include "CampaignParameters/Run2018102X-Prompt18/BaseParameters.h"
-#include "CampaignParameters/Run2018102X-Prompt18/TriggerInfo.h"
-#include "CampaignParameters/Run2018102X-Prompt18/Taggers.h"
-#include "CampaignParameters/Run2018102X-Prompt18/Systematics.h"
+#include "CampaignParameters/Run2018102X-2018Ultimate/BaseParameters.h"
+#include "CampaignParameters/Run2018102X-2018Ultimate/TriggerInfo.h"
+#include "CampaignParameters/Run2018102X-2018Ultimate/Taggers.h"
+#include "CampaignParameters/Run2018102X-2018Ultimate/Systematics.h"
 
 // Choose the production 
-//#include "CampaignParameters/Run2018102X-Prompt18/BaseProduction.h"
-#include "CampaignParameters/Run2018102X-Prompt18/Run2016Production.h"
+#include "CampaignParameters/Run2018102X-2018Ultimate/BaseProduction.h"
+//#include "CampaignParameters/Run2018102X-2018Ultimate/Run2016Production.h"
   
 float TotalScaleFactorSystematic[nFitPtBins][nPtRelEtaBins];
 float ScaleFactorSystematic[nFitPtBins][nPtRelEtaBins][nScaleFactorSystematics];
