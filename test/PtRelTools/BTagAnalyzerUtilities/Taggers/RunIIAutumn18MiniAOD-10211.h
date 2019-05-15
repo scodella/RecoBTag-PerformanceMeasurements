@@ -7,7 +7,7 @@ TString BTagAnalyzerTaggerName[nBTagAnalyzerTaggers] = {"TCHPL", "TCHET", "TCHPM
 							"CSVv2L","CSVv2M","CSVv2T", 
 							"CMVAv2L", "CMVAv2M", "CMVAv2T",
 							"DeepCSVL", "DeepCSVM", "DeepCSVT",
-							"DeepFlavourL", "DeepFlavourM", "DeepFlavourT"};
+							"DeepJetL", "DeepJetM", "DeepJetT"};
 float   BTagAnalyzerTaggerCut[nBTagAnalyzerTaggers]  = {1.19,    10.2,    1.93,    3.41,    1.7,     3.05,
 							0.244,   0.679,   0.898,
 							3.74,    3.14,    2.55,    2.43,    2.31,    2.18,    2.06,
@@ -15,5 +15,5 @@ float   BTagAnalyzerTaggerCut[nBTagAnalyzerTaggers]  = {1.19,    10.2,    1.93, 
 							0.2620,  0.5344,  0.7914,
 							0.5803,  0.8838,  0.9693,
 						       -0.5884,  0.4432,  0.9432,
-						        0.1522,  0.4941,  0.8001,
-						        0.0574,  0.4318,  0.9068};
+						        0.1241,  0.4184,  0.7527,
+						        0.0494,  0.2770,  0.7264};

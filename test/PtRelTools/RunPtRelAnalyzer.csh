@@ -7,10 +7,13 @@ setenv WORKINGDIRECTORY $PWD
 setenv TEMPLATEVARIABLE 'PtRel'
 #setenv TEMPLATEVARIABLE 'System8' 
 
-setenv PUWEIGHTING '_PSRun2016ICHEP'
+#setenv PUWEIGHTING ''
+setenv PUWEIGHTING '_PSRun2018Prompt18'
 
 #setenv KINWEIGHTING ''
-setenv KINWEIGHTING '_KinPtBinsCentral'
+#setenv KINWEIGHTING '_KinPtBinsCentral'
+setenv KINWEIGHTING '_KinEtaAfterPtBinsCentral'
+#setenv KINWEIGHTING '_KinPtInEtaBinsCentral'
 
 #setenv SELECTION ''
 #setenv SELECTION '_TrgEmul'
@@ -22,10 +25,15 @@ setenv SELECTION '_TrgConf'
 setenv MACRONAME 'BuildTemplatesAll'
 #setenv MACRONAME 'ComputeKinematicWeightsQCDMuJetHTQCDXAll'
 #setenv MACRONAME 'CompareDataToMC_anyEta'
-#setenv MACRONAME 'ComputePtRelScaleFactorsCSVv2:_Central:'
-#setenv MACRONAME 'PlotBTagPerformanceICHEP2016'
-#setenv MACRONAME 'AnalyzeSystematics'
-#setenv MACRONAME 'StoreScaleFactors'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio_bTempRatioCorr'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio_cJets_bTempRatioCorr'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_All:_LightTemplatesRatio_cJets_bTempRatioCorr'
+#setenv MACRONAME 'PlotBTagPerformancePrompt18'
+#setenv MACRONAME 'PlotBTagPerformanceKinEta'
+#setenv MACRONAME 'AnalyzeSystematics_LightTemplatesRatio_cJets_bTempRatioCorr'
+#setenv MACRONAME 'StoreScaleFactors_LightTemplatesRatio_cJets_bTempRatioCorr'
+#setenv MACRONAME 'ProduceLightHistogramsQCD' # For testing
 
 setenv DATARANGEINDEX '0'
 echo ""
@@ -35,7 +43,7 @@ echo "WORKINGDIRECTORY" $PWD
 echo ""
 
 eval `scramv1 runtime -csh`
-source /afs/cern.ch/project/eos/installation/cms/etc/setup.csh
+#source /afs/cern.ch/project/eos/installation/cms/etc/setup.csh
 
 echo "TEMPLATEVARIABLE " $TEMPLATEVARIABLE
 echo "PUWEIGHTING      " $PUWEIGHTING

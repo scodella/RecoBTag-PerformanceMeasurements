@@ -3,7 +3,7 @@
 R__LOAD_LIBRARY(PtRelAnalyzer_C.so) 
 //R__LOAD_LIBRARY(BTagCalibrationStandalone_cpp.so)
 
-  TString TemplateVariable, PUWeighting, KinWeighting, Selection;
+TString TemplateVariable, PUWeighting, KinWeighting, Selection;
   PtRelAnalyzer *ptRelAna;
 
 void ExecEventCounter(TString DataType) {
@@ -54,7 +54,7 @@ void ExecComputePileUpWeights(TString Operation, int DataRange) {
     ptRelAna->ComputePileUpWeights(Operation.ReplaceAll(DataType, ""), DataType);
 
   } else if (Operation.Contains("PS")) {
-
+    
     ptRelAna->ComputePileUpWeights("PS", Operation);
     ptRelAna->ComputePileUpWeights("PSm05", Operation);
     ptRelAna->ComputePileUpWeights("PSp05", Operation);
@@ -196,7 +196,10 @@ void ExecComputePtRelScaleFactors(TString Parameters = "CSVv2:_Central:") {
 
     for (int is = 0; is<nFitSystematics; is++) {
 
-      if (FitSystematicName[is].Contains("_Central_")) continue;
+      //if (FitSystematicName[is].Contains("_Central_")) continue;
+
+      if (!FitSystematicName[is].Contains("_Central_")) PlotOption = "";
+      else PlotOption = "png";
 
       ptRelAna->ComputePtRelScaleFactors(TaggerList, FitSystematicName[is], FitOption, PlotOption, PtBinList, EtaBinFlag, TemplateFlag);
 
@@ -237,13 +240,58 @@ void ExecPlotBTagPerformance(TString Dependence) {
       if (TaggerName[tg]=="DeepCSVM")
 	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
 
-  }else if (Dependence=="Moriond18") {
+  } else if (Dependence=="TrgConf") {
+
+    TString ConfigurationList[3] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "_KinPtBinsCentral_LowPtAway", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("DeepCSV"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="Run2017") {
+
+    TString ConfigurationList[4] = {"_PSRun2017BMoriond18_KinPtBinsCentral_LowPtAwayTrgConf", "_PSRun2017CDEMoriond18_KinPtBinsCentral_LowPtAwayTrgConf", "_PSRun2017EFMoriond18_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_bTempRatioCorr_cJets", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("DeepCSV"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="bJets") {
+
+    TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[4] = {"_Central_LightTemplatesRatio_cJets", "_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "_Central_LightTemplatesRatio__cJets_bJets", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("DeepCSV"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="Moriond18") {
 
     TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
     TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
 
     for (int tg = 0; tg<nTaggers; tg++) 
       if (TaggerName[tg].Contains("DeepCSV"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="Prompt18") {
+
+    TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[4] = {"_Central_LightTemplatesRatio", "_Central_LightTemplatesRatio_bTempRatioCorr", "_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("Deep"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="KinEta") {
+
+    TString ConfigurationList[4] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "_KinPtInEtaBinsCentral_LowPtAwayTrgConf", "_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("Deep"))
 	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
 
   }
@@ -255,7 +303,7 @@ void ExecAnalyzeSystematics(TString FitFlag = "") {
   cout << "ExecAnalyzeSystematics " << FitFlag << endl; 
 
   TString EtaList[2] = {"anyEta", "-"};
-  TString ConfigurationList[2] = {"_KinPtBinsCentral_LowPtAwayTrgConf", "-"};
+  TString ConfigurationList[2] = {KinWeighting + "_LowPtAwayTrgConf", "-"};
   
   for (int sfs = 1; sfs<nScaleFactorSystematics; sfs++) {
     
@@ -271,7 +319,7 @@ void ExecAnalyzeSystematics(TString FitFlag = "") {
   TString SystematicList[2] = {"_Central" + FitFlag, "-"};
   
   for (int tg = 1; tg<nTaggers; tg++)
-    ptRelAna->PlotBTagPerformance("Final", TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, "_Central" + FitFlag);//, "ScaleFactors");
+    ptRelAna->PlotBTagPerformance("Final", TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, "_Central" + FitFlag, "ScaleFactors");
 
 }
 
@@ -279,7 +327,7 @@ void ExecStoreScaleFactors(TString FitFlag = "") {
 
   cout << "ExecStoreScaleFactors " << FitFlag << endl; 
 
-  string BTagger = "CSVv2"; TString BTaggerName = BTagger;
+  string BTagger = "DeepFlavour"; TString BTaggerName = BTagger;
 
   TString OP = "All";
 
@@ -311,7 +359,7 @@ void ExecStoreScaleFactors(TString FitFlag = "") {
 	  
 	int SysFactor = 6 - ThisFlavour;
 
-	for (int fpt = 1; fpt<nFitPtBins; fpt++) {
+	for (int fpt = 0; fpt<nFitPtBins; fpt++) {
 	      
 	  float MinPt = FitPtEdge[fpt];
 	  float MaxPt = FitPtEdge[fpt+1];

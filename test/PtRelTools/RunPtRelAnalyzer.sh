@@ -4,7 +4,6 @@ cd $WORKINGDIRECTORY/
 echo "WORKINGDIRECTORY" $PWD
 echo ""
 eval `scramv1 runtime -sh`
-source /afs/cern.ch/project/eos/installation/cms/etc/setup.sh
 echo "LSB_JOBINDEX" $LSB_JOBINDEX
 #if [$?LSB_JOBINDEX]; then
 if [ -z ${LSB_JOBINDEX+x} ]; then
