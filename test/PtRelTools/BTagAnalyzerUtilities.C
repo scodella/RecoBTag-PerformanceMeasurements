@@ -864,6 +864,21 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName) {
     if (ThisCode=="_PFJet140") triggerIdx =   3;
     if (ThisCode=="_PFJet260") triggerIdx =   5;
     
+  } else if (CampaignName=="2018Ultimate") {
+
+    if (ThisCode=="_DiJet20")  triggerIdx =  38;
+    if (ThisCode=="_DiJet40")  triggerIdx =  39;
+    if (ThisCode=="_DiJet70")  triggerIdx =  40;
+    if (ThisCode=="_DiJet110") triggerIdx =  41;
+    if (ThisCode=="_DiJet170") triggerIdx =  42;
+    if (ThisCode=="_Jet300")   triggerIdx =  43;
+    
+    if (ThisCode=="_PFJet40")  triggerIdx =   0;
+    if (ThisCode=="_PFJet60")  triggerIdx =   1;
+    if (ThisCode=="_PFJet80")  triggerIdx =   2;
+    if (ThisCode=="_PFJet140") triggerIdx =   3;
+    if (ThisCode=="_PFJet260") triggerIdx =   5;
+    
   } 
 
   if (triggerIdx==-1) {
