@@ -292,15 +292,15 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
   
   std::cout << "Filling histograms" << std::endl;
 
+  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
+  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
+
   GetKinematicWeights(DataType);
   GetPileUpWeights(DataType);
   GetBTemplateCorrections();
   GetTriggerPrescales(DataType);
-  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs");
+  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs", DataRangeName);
   else ReadJetEnergyUncertainty("_MC", JECVersionMC, "_AK4PFchs");
-
-  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
-  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
   
   int nEventsFromTrees = 0;
    
@@ -615,6 +615,9 @@ void PtRelAnalyzer::FillSubjetHistograms(TString DataType, int DataRange) {
   
   std::cout << "Filling histograms" << std::endl;
 
+  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
+  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
+
   TString DataTypeForKinReweighting = DataType;
   //if (DataType=="QCD") DataTypeForKinReweighting = "QCDMu";
   GetKinematicWeights(DataTypeForKinReweighting);
@@ -624,13 +627,8 @@ void PtRelAnalyzer::FillSubjetHistograms(TString DataType, int DataRange) {
   GetPileUpWeights(DataTypeForPUReweighting);
   
   GetBTemplateCorrections();
-  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK8PFchs");
+  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK8PFchs", DataRangeName);
   else ReadJetEnergyUncertainty("_MC", JECVersionMC, "_AK8PFchs");
-  
-  //int ph = DataRange;
-
-  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
-  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
   
   int nEventsFromTrees = 0;
    
@@ -1225,15 +1223,15 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
   ResetLightHistograms(DataType);
 
   std::cout << "Filling light histograms" << std::endl;
+
+  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
+  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
   
   GetKinematicWeights(DataType);
   GetPileUpWeights(DataType);
   GetTriggerPrescales(DataType);
-  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs");
+  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs", DataRangeName);
   else ReadJetEnergyUncertainty("_MC", JECVersionMC, "_AK4PFchs");
-
-  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
-  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
 
   int nEventsFromTrees = 0;
  
@@ -1747,16 +1745,16 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
   ResetSystem8Histograms(DataType);
 
   std::cout << "Filling System8 histograms" << std::endl;
+  
+  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
+  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
 
   GetKinematicWeights(DataType);
   GetPileUpWeights(DataType);
   GetBTemplateCorrections();
   GetTriggerPrescales(DataType);
-  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs");
+  if (!DataType.Contains("QCD")) ReadJetEnergyUncertainty("_DATA", JECVersionData, "_AK4PFchs", DataRangeName);
   else ReadJetEnergyUncertainty("_MC", JECVersionMC, "_AK4PFchs");
-  
-  TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
-  GetDataRangeInformation(DataType, DataRange, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
 
   int nEventsFromTrees = 0;
   

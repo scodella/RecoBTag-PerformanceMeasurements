@@ -14,7 +14,7 @@ int nBTagMuTrees[nBTagMuRanges] = {554, 266, 262, 1255};
 // Jet data
 const int nJetRunRanges = 4;
 TString JetRunRangeName[nJetRunRanges] = {"JetHT_Run2018A_17Sep2018-v1", "JetHT_Run2018B_17Sep2018-v1", "JetHT_Run2018C_17Sep2018-v1", "JetHT_Run2018D-PromptReco-v2"};
-int nJetTrees[nJetRunRanges]    = {560, 270, 269, 1254};
+int nJetTrees[nJetRunRanges]    = {554, 264, 262, 1254};
 
 // QCD muon enriched 13 TeV
 const int nMonteCarloPtHatRanges = 12;

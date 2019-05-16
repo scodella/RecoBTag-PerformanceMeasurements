@@ -1336,12 +1336,29 @@ float GetJEU(int DataType, float jeteta, float jetpt) {
   
 }
 
-void ReadJetEnergyUncertainty(TString DataType, TString CorrectionVersion, TString JetType) {
+void ReadJetEnergyUncertainty(TString DataType, TString CorrectionVersion, TString JetType, TString DataRangeName = "") {
 
   int dt = 0;
   if (DataType=="_MC") dt = 1;
 
   TString JEUFileName = "./JEU/" + CorrectionVersion + DataType + "/" + CorrectionVersion + DataType + "_Uncertainty" + JetType + ".txt";
+  if (DataRangeName!="" && CorrectionVersion.Contains("RunXXX")) {
+    TString tok; Ssiz_t from = 0; const char* delim = "_";
+    while (DataRangeName.Tokenize(tok, from, delim)) {
+      if (tok.Contains("Run")) {
+	if (tok.Contains("A")) JEUFileName.ReplaceAll("RunXXX", "RunA");
+	if (tok.Contains("B")) JEUFileName.ReplaceAll("RunXXX", "RunB");
+	if (tok.Contains("C")) JEUFileName.ReplaceAll("RunXXX", "RunC");
+	if (tok.Contains("D")) JEUFileName.ReplaceAll("RunXXX", "RunD");
+	if (tok.Contains("E")) JEUFileName.ReplaceAll("RunXXX", "RunE");
+	if (tok.Contains("F")) JEUFileName.ReplaceAll("RunXXX", "RunF");
+	if (tok.Contains("G")) JEUFileName.ReplaceAll("RunXXX", "RunG");
+	if (tok.Contains("H")) JEUFileName.ReplaceAll("RunXXX", "RunH");
+	if (tok.Contains("I")) JEUFileName.ReplaceAll("RunXXX", "RunI");
+	if (tok.Contains("J")) JEUFileName.ReplaceAll("RunXXX", "RunJ");
+      }
+    }
+  }
   ifstream JEUFile; JEUFile.open(JEUFileName);
   
   if (!JEUFile)

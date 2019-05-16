@@ -1,8 +1,8 @@
 TString CampaignLuminosity = "59.97 fb^{-1} (13 TeV)";
 TString CampaignName       = "2018Ultimate";
 
-TString JECVersionData = "Fall17_17Nov2017F_V6";
-TString JECVersionMC   = "Fall17_17Nov2017_V6";
+TString JECVersionData = "Autumn18_RunXXX_V8";
+TString JECVersionMC   = "Autumn18_V8";
 
 // Eta bins
 const int nPtRelEtaBins = 3;
