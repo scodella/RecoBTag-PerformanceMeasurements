@@ -7,16 +7,15 @@ setenv WORKINGDIRECTORY $PWD
 setenv TEMPLATEVARIABLE 'PtRel' 
 #setenv TEMPLATEVARIABLE 'System8'  
 
+#setenv PUWEIGHTING 'None'
 setenv PUWEIGHTING '_PSRun20182018Ultimate'
 
-setenv KINWEIGHTING ''
+setenv KINWEIGHTING 'None'
 #setenv KINWEIGHTING '_KinPtBinsCentral'
 
-#setenv SELECTION ''
+#setenv SELECTION 'None'
 #setenv SELECTION '_TrgEmul'
 setenv SELECTION '_TrgConf'
-
-#setenv DATARANGEINDEX '-999'
 
 mkdir -p Weights/PileUp
 mkdir -p Templates
