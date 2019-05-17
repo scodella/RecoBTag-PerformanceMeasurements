@@ -1,0 +1,8 @@
+executable            = RunPtRelAnalyzerCondor.sh
+arguments             = WORKINGDIRECTORY TEMPLATEVARIABLE PUWEIGHTING KINWEIGHTING MACRONAME SELECTION $(ProcId)
+output                = JobOutput/out/PtRelAnalyzer.$(ClusterId).$(ProcId).out
+error                 = JobOutput/err/PtRelAnalyzer.$(ClusterId).$(ProcId).err
+log                   = JobOutput/log/PtRelAnalyzer.$(ClusterId).$(ProcId).log
++JobFlavour           = testmatch
+requirements          = (OpSysAndVer =?= "SLCern6")
+queue                 NJOBS
