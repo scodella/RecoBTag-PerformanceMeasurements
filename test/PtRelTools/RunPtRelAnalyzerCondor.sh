@@ -22,15 +22,16 @@ if [ "$SELECTION" == "None" ]; then
     export SELECTION=""
 fi
 #
+echo ""
 echo "TEMPLATEVARIABLE " $TEMPLATEVARIABLE
 echo "PUWEIGHTING      " $PUWEIGHTING
 echo "KINWEIGHTING     " $KINWEIGHTING
 echo "MACRONAME        " $MACRONAME
 echo "SELECTION        " $SELECTION
 echo "DATARANGEINDEX   " $DATARANGEINDEX
-echo ""
 #
-root -l -b -q 'RunPtRelAnalyzer.C'
+echo ""
+root -l -b -q RunPtRelAnalyzer.C
 rm core.* 
 echo ""
    
