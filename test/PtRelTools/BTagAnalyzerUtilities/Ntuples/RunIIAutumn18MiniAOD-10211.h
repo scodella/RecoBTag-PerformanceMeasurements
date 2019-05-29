@@ -7,21 +7,21 @@ TString EOSPathJetHT     = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag
 TString TreeContentFlag = "";
 
 // BTag data
-const int nBTagMuRanges = 4;
-TString BTagMuRangeName[nBTagMuRanges] = {"BTagMu_Run2018A_17Sep2018-v1", "BTagMu_Run2018B_17Sep2018-v1", "BTagMu_Run2018C_17Sep2018-v1", "BTagMu_Run2018D-PromptReco-v2"};
-int nBTagMuTrees[nBTagMuRanges] = {554, 266, 262, 1255};
+const int nBTagMuRanges = 6;
+TString BTagMuRangeName[nBTagMuRanges] = {"BTagMu_Run2018A_17Sep2018-v1", "BTagMu_Run2018B_17Sep2018-v1", "BTagMu_Run2018C_17Sep2018-v1", "BTagMu_Run2018D-PromptReco-v2:1of3", "BTagMu_Run2018D-PromptReco-v2:2of3", "BTagMu_Run2018D-PromptReco-v2:3of3"};
+int nBTagMuTrees[nBTagMuRanges] = {554, 262, 262, 1255, 1255, 1255};
 
 // Jet data
-const int nJetRunRanges = 4;
-TString JetRunRangeName[nJetRunRanges] = {"JetHT_Run2018A_17Sep2018-v1", "JetHT_Run2018B_17Sep2018-v1", "JetHT_Run2018C_17Sep2018-v1", "JetHT_Run2018D-PromptReco-v2"};
-int nJetTrees[nJetRunRanges]    = {554, 264, 262, 1254};
+const int nJetRunRanges = 6;
+TString JetRunRangeName[nJetRunRanges] = {"JetHT_Run2018A_17Sep2018-v1", "JetHT_Run2018B_17Sep2018-v1", "JetHT_Run2018C_17Sep2018-v1", "JetHT_Run2018D-PromptReco-v2:1of3", "JetHT_Run2018D-PromptReco-v2:2of3", "JetHT_Run2018D-PromptReco-v2:3of3"};
+int nJetTrees[nJetRunRanges]    = {554, 264, 262, 1254, 1254, 1254};
 
 // QCD muon enriched 13 TeV
 const int nMonteCarloPtHatRanges = 12;
 TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = {    "Pt-15to20",      "Pt-20to30",       "Pt-30to50",       "Pt-50to80",       "Pt-80to120",   "Pt-120to170",   "Pt-170to300",             "Pt-300to470", "Pt-470to600",    "Pt-600to800",          "Pt-800to1000",     "Pt-1000toInf"};
 double CrossSection[nMonteCarloPtHatRanges]          = {1.27319E9*0.003, 5.58528E8*0.0053, 1.39803E8*0.01182, 1.92225E7*0.02276, 2.758420E6*0.03844, 469797.*0.05362, 117989.*0.07335,         7820.25*0.10196,        645.528*0.12242,   187.109*0.13412,         32.3486*0.14552,       10.4305*0.15544};
-double GeneratedEvents[nMonteCarloPtHatRanges]       = {4171764, 30612338, 20532426, 20268872, 25039361, 20682254, 33772284, 25998894, 19864008, 16618977, 0, 10719790};
-int nMonteCarloTrees[nMonteCarloPtHatRanges]         = {117, 454, 410, 338, 471, 387, 647, 636, 544, 419, 0, 279};
+double GeneratedEvents[nMonteCarloPtHatRanges]       = {4576065, 30612338, 29076487, 19921151, 5884681, 19116008, 35025896, 27158639, 19869770, 16363909, 14974995, 10410480};
+int nMonteCarloTrees[nMonteCarloPtHatRanges]         = {129, 454, 509, 338, 471, 387, 647, 734, 544, 419, 466, 279};
 
 // QCD inclusive 13 TeV 
 const int nMCInclusivePtHatRanges = 17;                                       
