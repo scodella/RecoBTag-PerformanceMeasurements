@@ -1,3 +1,4 @@
+
 #include "TString.h"
 #include "TH1D.h"
 #include "TH2D.h"
@@ -767,7 +768,7 @@ int IsMuonJet(int ijet, bool TightMuon = true) {
 
 }
 
-bool PassTriggerBit(TString ThisCode, TString CampaignName) {
+bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = -1) {
 
   if (ThisCode=="NONE") return true;
 
@@ -866,13 +867,26 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName) {
     
   } else if (CampaignName=="2018Ultimate") {
 
-    if (ThisCode=="_DiJet20")  triggerIdx =  38;
-    if (ThisCode=="_DiJet40")  triggerIdx =  39;
-    if (ThisCode=="_DiJet70")  triggerIdx =  40;
-    if (ThisCode=="_DiJet110") triggerIdx =  41;
-    if (ThisCode=="_DiJet170") triggerIdx =  42;
-    if (ThisCode=="_Jet300")   triggerIdx =  43;
+    if (TriggerPeriod==0) {
+
+      if (ThisCode=="_DiJet20")  triggerIdx =  32;
+      if (ThisCode=="_DiJet40")  triggerIdx =  33;
+      if (ThisCode=="_DiJet70")  triggerIdx =  34;
+      if (ThisCode=="_DiJet110") triggerIdx =  35;
+      if (ThisCode=="_DiJet170") triggerIdx =  36;
+      if (ThisCode=="_Jet300")   triggerIdx =  37;
     
+    } else if (TriggerPeriod==1) {
+
+      if (ThisCode=="_DiJet20")  triggerIdx =  40;
+      if (ThisCode=="_DiJet40")  triggerIdx =  41;
+      if (ThisCode=="_DiJet70")  triggerIdx =  42;
+      if (ThisCode=="_DiJet110") triggerIdx =  43;
+      if (ThisCode=="_DiJet170") triggerIdx =  44;
+      if (ThisCode=="_Jet300")   triggerIdx =  45;
+
+    }
+
     if (ThisCode=="_PFJet40")  triggerIdx =   0;
     if (ThisCode=="_PFJet60")  triggerIdx =   1;
     if (ThisCode=="_PFJet80")  triggerIdx =   2;

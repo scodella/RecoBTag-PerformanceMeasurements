@@ -344,6 +344,15 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	
 	bool PassTrigger[nTriggers];
 	
+	int triggerPeriod = -1;
+	if (CampaignName=="2018Ultimate") {
+	  if (DataType.Contains("QCDMu")) {
+	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
+	  } else if (DataType=="BTagMu") {
+	    triggerPeriod = (Run<320500) ? 0 : 1;
+	  }
+	}
+
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
 	  PassTrigger[trg] = false;
@@ -352,7 +361,7 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	    
 	    bool FiredTrigger = false;
 	    if (DataType=="BTagMu" || !Selection.Contains("TrgEmul")) {
-	      if (PassTriggerBit(TriggerName[trg], CampaignName)) FiredTrigger = true;
+	      if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) FiredTrigger = true;
 	      if (FiredTrigger && (Selection.Contains("TrgConf") || Selection.Contains("TrgEmul"))) 
 		if (!PassTriggerEmulation(trg, jMu)) FiredTrigger = false;
 	    } else {
@@ -374,7 +383,7 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	  if (!PassPtHat("MuEnrichedPt5", jMu)) tr = -1;	  
 	if (DataType=="QCD") 
 	  if (!PassPtHat("Inclusive", jMu)) tr = -1;
-				     
+
 	if (tr>=0) {
 	  
 	  bool JetAwayPass[nSystematics], EventJetAwayPass = false;
@@ -681,6 +690,15 @@ void PtRelAnalyzer::FillSubjetHistograms(TString DataType, int DataRange) {
 	
 	bool PassTrigger[nTriggers];
 	
+	int triggerPeriod = -1;
+	if (CampaignName=="2018Ultimate") {
+	  if (DataType.Contains("QCDMu")) {
+	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
+	  } else if (DataType=="BTagMu") {
+	    triggerPeriod = (Run<320500) ? 0 : 1;
+	  }
+	}
+	
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
 	  PassTrigger[trg] = false;
@@ -689,7 +707,7 @@ void PtRelAnalyzer::FillSubjetHistograms(TString DataType, int DataRange) {
 	  
 	    bool FiredTrigger = false;
 	    if (DataType=="BTagMu" || DataType=="JetHT" || !Selection.Contains("TrgEmul")) {
-	      if (PassTriggerBit(TriggerName[trg], CampaignName)) FiredTrigger = true;
+	      if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) FiredTrigger = true;
 	      if (FiredTrigger && (Selection.Contains("TrgConf") || Selection.Contains("TrgEmul"))) 
 		if (!PassTriggerEmulation(trg, jMu)) FiredTrigger = false;
 	    } else {
@@ -1799,6 +1817,15 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
 	
 	bool PassTrigger[nTriggers];
 	
+	int triggerPeriod = -1;
+	if (CampaignName=="2018Ultimate") {
+	  if (DataType.Contains("QCDMu")) {
+	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
+	  } else if (DataType=="BTagMu") {
+	    triggerPeriod = (Run<320500) ? 0 : 1;
+	  }
+	}
+	
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
 	  PassTrigger[trg] = false;
@@ -1807,7 +1834,7 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
 	    
 	    bool FiredTrigger = false;
 	    if (DataType=="BTagMu" || !Selection.Contains("TrgEmul")) {
-	      if (PassTriggerBit(TriggerName[trg], CampaignName)) FiredTrigger = true;
+	      if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) FiredTrigger = true;
 	      if (FiredTrigger && (Selection.Contains("TrgConf") || Selection.Contains("TrgEmul"))) 
 		if (!PassTriggerEmulation(trg, jMu)) FiredTrigger = false;
 	    } else {
@@ -3194,6 +3221,7 @@ void PtRelAnalyzer::BuildTemplates(bool AddTrackTemplates, TString DataFlag, TSt
 	  for (int is = 0; is<nSystematics; is++) {
 	    
 	    ThisHistoName = HistogramName("Observed_" + DataFlag, bpt, nb, -1, is, -1, -1);
+	    
 	    TH2D *ThisObserved = (TH2D*) DataFile->Get(ThisHistoName);
 	    
 	    for (int tr = 0; tr<nTriggers; tr++)
@@ -3346,7 +3374,7 @@ void PtRelAnalyzer::BuildTemplates(bool AddTrackTemplates, TString DataFlag, TSt
 		  }
 		  
 		} 
-		
+
 		MuonPt[0][is][fpt][nb]->Add(ThisDataMuPt);
 		MuonDR[0][is][fpt][nb]->Add(ThisDataMuDR);
 		JetPt[0][is][fpt][nb]->Add(ThisDataJetPt);
@@ -3456,25 +3484,25 @@ void PtRelAnalyzer::BuildTemplates(bool AddTrackTemplates, TString DataFlag, TSt
 		    int nScaleBins = ThisQCDPtRelTagLG->GetNbinsX();
 		    float TagLuminosityWeight   = ThisQCDPtRelTagLG->Integral(0, nScaleBins);
 		    float UntagLuminosityWeight = ThisQCDPtRelUntagLG->Integral(0, nScaleBins);
-
+		  
 		    ThisHistoName = HistogramName(TemplateVariable + "_JetHT", bpt, nb, tr, is, tg,  4);
 		    TH1D *ThisJetPtRelTagTrk = (TH1D*) JetFile->Get(ThisHistoName);
                     float JetTagLuminosityWeight = TagLuminosityWeight/ThisJetPtRelTagTrk->Integral(0, nScaleBins);
 		    ThisJetPtRelTagTrk->Scale(JetTagLuminosityWeight);
 		    PtRel[tg][is][fpt][nb][3]->Add(ThisJetPtRelTagTrk);
-		  
+
 		    ThisHistoName = HistogramName(TemplateVariable + "_JetHT", bpt, nb, tr, is, tg, 14);
 		    TH1D *ThisJetPtRelUntagTrk = (TH1D*) JetFile->Get(ThisHistoName);
                     float JetUntagLuminosityWeight = UntagLuminosityWeight/ThisJetPtRelUntagTrk->Integral(0, nScaleBins);
 		    ThisJetPtRelUntagTrk->Scale(JetUntagLuminosityWeight);
 		    PtRel[tg][is][fpt][nb][7]->Add(ThisJetPtRelUntagTrk);
-		  
+
 		    ThisHistoName = HistogramName(TemplateVariable + "_QCD", bpt, nb, tr, is, tg,  4);
 		    TH1D *ThisIncPtRelTagTrk = (TH1D*) IncFile->Get(ThisHistoName);
                     float IncTagLuminosityWeight = TagLuminosityWeight/ThisIncPtRelTagTrk->Integral(0, nScaleBins);
 		    ThisIncPtRelTagTrk->Scale(IncTagLuminosityWeight);
 		    PtRel[nTaggers+tg][is][fpt][nb][3]->Add(ThisIncPtRelTagTrk);
-		  
+
 		    ThisHistoName = HistogramName(TemplateVariable + "_QCD", bpt, nb, tr, is, tg, 14);
 		    TH1D *ThisIncPtRelUntagTrk = (TH1D*) IncFile->Get(ThisHistoName);
                     float IncUntagLuminosityWeight = UntagLuminosityWeight/ThisIncPtRelUntagTrk->Integral(0, nScaleBins);
@@ -3482,17 +3510,17 @@ void PtRelAnalyzer::BuildTemplates(bool AddTrackTemplates, TString DataFlag, TSt
 		    PtRel[nTaggers+tg][is][fpt][nb][7]->Add(ThisIncPtRelUntagTrk);
 
 		  }
-		  
+
 		}
 
 	      }
 
-	    }
-		    
 	  }
-		  
+	  
+	}
+	
       }
-		
+      
     }
     
   }
@@ -4504,10 +4532,10 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       TH1D *ThisQCD = (TH1D*) PtRelTemplateFile->Get(HistoQCDName); 
       ThisQCD->SetDirectory(0); 
       ThisQCD->Rebin(TemplateRebinning);
-      if (HistoName.Contains("CSVv2") && HistoName.Contains("Pt3050")) {
-	int BinTail = ThisQCD->FindBin(2.99);
-	ThisQCD->SetBinContent(BinTail, 4.);
-      }
+      //if (HistoName.Contains("CSVv2") && HistoName.Contains("Pt3050")) {
+      //	int BinTail = ThisQCD->FindBin(2.99);
+      //	ThisQCD->SetBinContent(BinTail, 4.);
+      //}
 
       TString HistoDataName = HistoName; 
       HistoDataName.ReplaceAll("_QCDMu", "_BTagMu"); 
@@ -4550,6 +4578,7 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       float NormData = ThisData->Integral();
       ThisQCD->Scale(NormData/NormQCD);
       float NormPtRel = ThisPtRel->Integral();
+      float EntriesPtRel = ThisPtRel->GetEntries();
       //ThisData->Divide(ThisQCD);
       //int BinTail = ThisData->FindBin(3.7);
       //for (int tb = BinTail; tb<=ThisData->GetNbinsX(); tb++)
@@ -4557,17 +4586,20 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
         //ThisData->SetBinContent(tb, 1.); 
       ThisPtRel->Divide(ThisQCD); 
       ThisPtRel->Multiply(ThisData); 
-      //int BinTail = ThisPtRel->FindBin(3.5);
-      //float NormPtRelCorr = ThisPtRel->Integral();
-      //for (int tb = BinTail; tb<=ThisPtRel->GetNbinsX(); tb++)
-      //if (ThisPtRel->GetBinContent(tb)/NormPtRelCorr>0.1) {
-      //  float PrevBin = ThisPtRel->GetBinContent(tb-1);
-	  //ThisPtRel->SetBinContent(tb, 0.9*PrevBin); 
-	  //ThisPtRel->SetBinError(tb, 0.); 
-      //}
-
+      int BinTail = ThisPtRel->FindBin(2.5);
       float NormPtRelCorr = ThisPtRel->Integral();
+      for (int tb = BinTail; tb<=ThisPtRel->GetNbinsX(); tb++) {
+	if (ThisPtRel->GetBinContent(tb)/NormPtRelCorr>0.1) {
+	  float PrevBin = ThisPtRel->GetBinContent(tb-1);
+	  float PrevBinErr = ThisPtRel->GetBinError(tb-1);
+	  ThisPtRel->SetBinContent(tb, 0.9*PrevBin); 
+	  ThisPtRel->SetBinError(tb, PrevBinErr); 
+	}
+      }
+
+      NormPtRelCorr = ThisPtRel->Integral();
       ThisPtRel->Scale(NormPtRel/NormPtRelCorr);
+      ThisPtRel->SetEntries(EntriesPtRel);
      
     }
     
@@ -4588,10 +4620,10 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       TH1D *ThisQCD = (TH1D*) PtRelTemplateFile->Get(HistoQCDName); 
       ThisQCD->SetDirectory(0); 
       ThisQCD->Rebin(TemplateRebinning);
-      if (HistoName.Contains("CSVv2") && HistoName.Contains("Pt3050")) {
+      /*if (HistoName.Contains("CSVv2") && HistoName.Contains("Pt3050")) {
 	int BinTail = ThisQCD->FindBin(2.99);
 	ThisQCD->SetBinContent(BinTail, 4.);
-      }
+	}*/
 
       TString HistoDataName = HistoName; 
       HistoDataName.ReplaceAll("_QCDMu", "_BTagMu"); 
@@ -4770,7 +4802,7 @@ struct PtRelFitResult PtRelAnalyzer::PtRelFit(TH1D* DataTemplate, TH1D* bTemplat
   double bEntries = 0.;//bTemplate->GetEntries();
   double cEntries = 0.;//cTemplate->GetEntries();
   double lgEntries = 0.;//lgTemplate->GetEntries();
-  
+ 
   for (int ib = bTemplate->GetNbinsX(); ib>=1; ib--) {
     if (ib<=UpperBinForTemp && bTemplate->GetBinContent(ib)<0.) UpperBinForTemp = ib-1;
     if (ib<=UpperBinForTemp && cTemplate->GetBinContent(ib)<0.) UpperBinForTemp = ib-1;
@@ -4915,7 +4947,7 @@ struct PtRelFitResult PtRelAnalyzer::PtRelFit(TH1D* DataTemplate, TH1D* bTemplat
       FitContent.cFraction = cIntegral/mcIntegral;
     }
 
-    FitContent.bFractionError  = 0.3;
+    FitContent.bFractionError  = FitContent.bFraction<0.3 ? FitContent.bFraction : 0.3;
     FitContent.lightFractionError = 0.3;
     FitContent.cFractionError  = 0.3;
 
@@ -5513,8 +5545,11 @@ void PtRelAnalyzer::PlotBTagPerformance(TString PlotFlag, TString Tagger, TStrin
   for (int nb = 0; nb<100 && EtaList[nb]!="-"; nb++)   
     for (int cfg = 0; cfg<100 && ConfigurationList[cfg]!="-"; cfg++)
       for (int is = 0; is<100 && SystematicList[is]!="-"; is++) {
-	
-	FillBTagPerformanceHistograms(Tagger, EtaList[nb], ConfigurationList[cfg], SystematicList[is], ColorIndex, DrawedSystematics);
+
+	TString TaggerS = Tagger; 
+	if (ConfigurationList[cfg].Contains("Prompt18")) TaggerS.ReplaceAll("DeepJet", "DeepFlavour");
+
+	FillBTagPerformanceHistograms(TaggerS, EtaList[nb], ConfigurationList[cfg], SystematicList[is], ColorIndex, DrawedSystematics);
 	
 	ThisCanvas->cd(1);
 
@@ -5806,6 +5841,15 @@ void PtRelAnalyzer::ComputePileUpWeights(TString PUMethod, TString DataType, int
 		if (PUWeighting.Contains("PV") || PUWeighting.Contains("PSV")) EventPileUp = nPV;
 		if (EventPileUp<0) EventPileUp = nPV/0.8;
 		if (EventPileUp>=nMaxPU) EventPileUp = nMaxPU - 1;
+
+		int triggerPeriod = -1;
+		if (CampaignName=="2018Ultimate") {
+		  if (DataType.Contains("QCD")) {
+		    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
+		  } else {
+		    triggerPeriod = (Run<320500) ? 0 : 1;
+		  }
+		}
 		
 		for (int tr = 0; tr<nTriggers; tr++) {
 
@@ -5817,7 +5861,7 @@ void PtRelAnalyzer::ComputePileUpWeights(TString PUMethod, TString DataType, int
 
 		  bool PassTrigger = true;
 		  if (DataTypeName[dt]!="QCD") 
-		    PassTrigger = PassTriggerBit(ThisTriggerName, CampaignName);
+		    PassTrigger = PassTriggerBit(ThisTriggerName, CampaignName, triggerPeriod);
 		   
 		  //if (DataTypeName[dt]=="QCD" || DataTypeName[dt]=="JetHT")
 		  //if (!PassEventTriggerEmulation(tr, DataTypeName[dt])) PassTrigger = false;
@@ -6595,12 +6639,17 @@ void PtRelAnalyzer::ComputeMethodsOverlap() {
 	      if (Jet_pt[jMu]>PtRelPtEdge[ptb]) ptBin = ptb;
 	    
 	    bool PassTrigger[nMethods] = {false, false, false};
+	
+	    int triggerPeriod = -1;
+	    if (CampaignName=="2018Ultimate") {
+	      triggerPeriod = (Run<320500) ? 0 : 1;
+	    }
 	    
 	    for (int trg = 0; trg<nTriggers; trg++) {
 	      
 	      if (Jet_pt[jMu]>MinPtJetTrigger[trg] && Jet_pt[jMu]<MaxPtJetTrigger[trg]) {
 		
-		if (PassTriggerBit(TriggerName[trg], CampaignName)) {
+		if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) {
 		  
 		  PassTrigger[1] = true;
 		  
@@ -6851,13 +6900,13 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
     OldWorkingPoint[1] =  0.515;
     OldWorkingPoint[2] =  0.760;
   } else if (AlgorithmName.Contains("DeepCSV")) { 
-    OldWorkingPoint[0] =  0.2219;
-    OldWorkingPoint[1] =  0.6324;
-    OldWorkingPoint[2] =  0.8958;
+    OldWorkingPoint[0] =  0.1241;
+    OldWorkingPoint[1] =  0.4184;
+    OldWorkingPoint[2] =  0.7527;
   }else if (AlgorithmName.Contains("DeepJet")) { 
-    OldWorkingPoint[0] =  0.0574;
-    OldWorkingPoint[1] =  0.4318;
-    OldWorkingPoint[2] =  0.9068;
+    OldWorkingPoint[0] =  0.0494;
+    OldWorkingPoint[1] =  0.2770;
+    OldWorkingPoint[2] =  0.7264;
   }
 
   double IntegralLightJets  = TaggerDiscriminator[2]->Integral(0, nDiscriminatorBins+1);
