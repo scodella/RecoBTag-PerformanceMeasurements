@@ -352,6 +352,8 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	    triggerPeriod = (Run<320500) ? 0 : 1;
 	  }
 	}
+	if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
+	if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
 
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
@@ -1283,6 +1285,17 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 	if (PUWeighting.Contains("Run2017CDEMoriond18") && (Run<=299329 || Run>304671)) continue;
 	if (PUWeighting.Contains("Run2017EFMoriond18") && Run<=304671) continue;
       }
+	
+      int triggerPeriod = -1;
+      if (CampaignName=="2018Ultimate") {
+	if (DataType.Contains("QCD")) {
+	  triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
+	} else if (DataType=="BTagMu") {
+	  triggerPeriod = (Run<320500) ? 0 : 1;
+	}
+      }
+      if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
+      if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
 
       for (int ijet = 0; ijet<nJet; ijet++) {
 	    
@@ -1825,7 +1838,9 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
 	    triggerPeriod = (Run<320500) ? 0 : 1;
 	  }
 	}
-	
+	if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
+	if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
+
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
 	  PassTrigger[trg] = false;
@@ -5415,6 +5430,10 @@ void PtRelAnalyzer::FillBTagPerformanceHistograms(TString Tagger, TString EtaBin
   for (int ppt = 1; ppt<MCEfficiency->GetNbinsX(); ppt++) {
 
     TString TableName = ScaleFactorResultTableName(Tagger, EtaBin, FitPtBin[ppt-1], Systematic, ThisPUWeighting, Configuration, Production);
+    if (Systematic.Contains("_Nonoalgo")) {
+      TableName.ReplaceAll("Tables", "TablesNonoalgo");
+      TableName.ReplaceAll("_Nonoalgo", "");
+    }
     
     ScaleFactorResult ThisScaleFactorResult;
 
