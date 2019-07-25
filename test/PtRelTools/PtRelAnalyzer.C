@@ -1290,7 +1290,7 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
       if (CampaignName=="2018Ultimate") {
 	if (DataType.Contains("QCD")) {
 	  triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
-	} else if (DataType=="BTagMu") {
+	} else {
 	  triggerPeriod = (Run<320500) ? 0 : 1;
 	}
       }
