@@ -352,8 +352,8 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	    triggerPeriod = (Run<320500) ? 0 : 1;
 	  }
 	}
-	if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
-	if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
+	if (PUWeighting.Contains("Run2018ABC") && triggerPeriod==1) continue;
+	if (PUWeighting.Contains("Run2018D") && triggerPeriod==0) continue;
 
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
@@ -1294,8 +1294,8 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 	  triggerPeriod = (Run<320500) ? 0 : 1;
 	}
       }
-      if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
-      if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
+      if (PUWeighting.Contains("Run2018ABC") && triggerPeriod==1) continue;
+      if (PUWeighting.Contains("Run2018D") && triggerPeriod==0) continue;
 
       for (int ijet = 0; ijet<nJet; ijet++) {
 	    
@@ -1838,8 +1838,8 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
 	    triggerPeriod = (Run<320500) ? 0 : 1;
 	  }
 	}
-	if (PUWeighting.Contains("Run2018ABC" && triggerPeriod==1)) continue;
-	if (PUWeighting.Contains("Run2018D" && triggerPeriod==0)) continue;
+	if (PUWeighting.Contains("Run2018ABC") && triggerPeriod==1) continue;
+	if (PUWeighting.Contains("Run2018D") && triggerPeriod==0) continue;
 
 	for (int trg = 0; trg<nTriggers; trg++) {
 	  
