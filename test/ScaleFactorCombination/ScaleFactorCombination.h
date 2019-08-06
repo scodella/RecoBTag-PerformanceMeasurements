@@ -1,26 +1,25 @@
-#include "Measurements/Run2015B/CampaignInfo.h"
+#include "Measurements/2018Ultimate/CampaignInfo.h"
 
-bool System8  = true;
-bool Ptrel    = true;
-bool Ip3d     = false;
-bool LifeTime = true;
-bool JPsi     = false;
-bool TTbar    = false;
-bool KinTT    = false;
-bool TagCntTT = true;
+bool PrintPNG  =  true;
+bool PrintPDF  =  true;
+bool PrintC    =  true;
+bool PrintRoot =  true;
 
 bool etamin = false;
 bool etamax = false;
 
-bool PrintComparison = false;
+bool PrintComparison             =  false;
+bool SampleCombinationComparison =  false;
+bool PrintOnlyTypeMeasurements   =  false;
+bool PrintPtFit                  =  false;
 
-bool StatisticalCorrelation = true;
+bool StoreFittedScaleFactors =  true;
+bool SystematicBreakdown     = false;
+bool CategoryBreakdown       = false;
+bool PtCorrelationBreakdown  = false;
+bool StatisticBreakdown      = false;
 
-bool InflateStatistic = false;
-
-bool OfficialCMS = false;
-
-bool SystematicBreakdown = false;
+int TaggingAlgorithm = -1;
 
 enum { NBINS = 20 };
 
@@ -31,16 +30,18 @@ float MeasuredScaleFactor[nMeasurements][NBINS], MeasuredScaleFactorUncertainty[
 float xpt[nMeasurements][NBINS], expt[nMeasurements][NBINS]; 
 float MeasuredScaleFactorValue[nMeasurements][NBINS], MeasuredScaleFactorError[nMeasurements][NBINS], MeasuredScaleFactorStatistic[nMeasurements][NBINS];
 
-//int MeasurementBinIndex[nBinsCampaign][nMeasurements];
-//int MeasurementsForBin[nBinsCampaign];
 int nTotalMeasurements;
 int MeasurementBinIndex[1000];
 int CampaignBinIndex[1000];
+int nBinsCampaignForFit;
+int FirstBinCampaignForFit;
+int LastBinCampaignForFit;
+//int nBinsCampaignForPlot;
 
 TString TSfun1;
 
-float sf[NBINS], sf_stat[NBINS], sf_syst[NBINS], sf_eror[NBINS], sf_uncerbreak[NBINS][50];
-float fun_val[NBINS], fun_err[NBINS], fun_sys[NBINS];
+float sf[NBINS], sf_stat[NBINS], sf_error[NBINS], sf_uncerbreak[NBINS][50];
+float fun_val[NBINS], fun_err[NBINS], fun_unc[NBINS][50];
 
-double Chi2Normal[NBINS];
-int nBinMeasurements[NBINS];
+double NormalizedChi2;
+
