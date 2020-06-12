@@ -20,7 +20,7 @@ int nJetTrees[nJetRunRanges]    = {554, 264, 262, 1254, 1254, 1254};
 const int nMonteCarloPtHatRanges = 12;
 TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = {    "Pt-15to20",      "Pt-20to30",       "Pt-30to50",       "Pt-50to80",       "Pt-80to120",   "Pt-120to170",   "Pt-170to300",             "Pt-300to470", "Pt-470to600",    "Pt-600to800",          "Pt-800to1000",     "Pt-1000toInf"};
 double CrossSection[nMonteCarloPtHatRanges]          = {1.27319E9*0.003, 5.58528E8*0.0053, 1.39803E8*0.01182, 1.92225E7*0.02276, 2.758420E6*0.03844, 469797.*0.05362, 117989.*0.07335,         7820.25*0.10196,        645.528*0.12242,   187.109*0.13412,         32.3486*0.14552,       10.4305*0.15544};
-double GeneratedEvents[nMonteCarloPtHatRanges]       = {4576065, 30612338, 29076487, 19921151, 5884681, 19116008, 35025896, 27158639, 19869770, 16363909, 14974995, 10410480};
+double GeneratedEvents[nMonteCarloPtHatRanges]       = {4576065, 30612338, 29076487, 19921151, 25039361, 19116008, 35025896, 27158639, 19869770, 16363909, 14974995, 10410480};
 int nMonteCarloTrees[nMonteCarloPtHatRanges]         = {129, 454, 509, 338, 471, 387, 647, 734, 544, 419, 466, 279};
 
 // QCD inclusive 13 TeV 

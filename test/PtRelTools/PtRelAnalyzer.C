@@ -6919,13 +6919,13 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
     OldWorkingPoint[1] =  0.515;
     OldWorkingPoint[2] =  0.760;
   } else if (AlgorithmName.Contains("DeepCSV")) { 
-    OldWorkingPoint[0] =  0.1241;
-    OldWorkingPoint[1] =  0.4184;
-    OldWorkingPoint[2] =  0.7527;
+    OldWorkingPoint[0] =  0.1522;
+    OldWorkingPoint[1] =  0.4941;
+    OldWorkingPoint[2] =  0.8001;
   }else if (AlgorithmName.Contains("DeepJet")) { 
-    OldWorkingPoint[0] =  0.0494;
-    OldWorkingPoint[1] =  0.2770;
-    OldWorkingPoint[2] =  0.7264;
+    OldWorkingPoint[0] =  0.0521;
+    OldWorkingPoint[1] =  0.3033;
+    OldWorkingPoint[2] =  0.7489;
   }
 
   double IntegralLightJets  = TaggerDiscriminator[2]->Integral(0, nDiscriminatorBins+1);

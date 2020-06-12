@@ -8,8 +8,8 @@
 #include <fstream>
 #include <iostream>
 
-#include "BTagAnalyzerUtilities/Ntuples/RunIIAutumn18MiniAOD-10211.h"
-#include "BTagAnalyzerUtilities/Taggers/RunIIAutumn18MiniAOD-10211.h"
+#include "BTagAnalyzerUtilities/Ntuples/RunIISummer19UL17MiniAOD-106X.h"
+#include "BTagAnalyzerUtilities/Taggers/RunIISummer19UL17MiniAOD-106X.h"
 
 int Run, Evt, nPU, nPV, nTrkInc, nBHadrons, nDHadrons, nGenlep, nGenquark, nBitTrigger;
 int BitTrigger[100], Jet_flavour[50], Jet_nFirstTrkInc[50], Jet_nLastTrkInc[50], Muon_IdxJet[50]; 

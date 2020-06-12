@@ -294,6 +294,24 @@ void ExecPlotBTagPerformance(TString Dependence) {
       if (TaggerName[tg].Contains("Deep"))
 	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, DrawedSystematics, "ScaleFactors");
 
+  } else if (Dependence=="2018Reco") {
+
+    TString ConfigurationList[3] = {"_PSRun2018Prompt18_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "_PSRun20182018Ultimate_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++) 
+      if (TaggerName[tg].Contains("Deep"))
+	ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="Nonoalgo") {
+
+    TString ConfigurationList[3] = {"_PSRun2018ABC2018Ultimate_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "_PSRun2018D2018Ultimate_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[3] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++)
+      if (TaggerName[tg].Contains("Deep"))
+        ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
+
   }
   
 }
@@ -312,14 +330,14 @@ void ExecAnalyzeSystematics(TString FitFlag = "") {
     TString DepOn = ScaleFactorSystematicName[sfs]; DepOn.ReplaceAll("_", "");
     
     for (int tg = 1; tg<nTaggers; tg++) 
-      ptRelAna->PlotBTagPerformance(DepOn, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, "NONE");
+      ptRelAna->PlotBTagPerformance(DepOn, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, "NONE");
   
   }
 
   TString SystematicList[2] = {"_Central" + FitFlag, "-"};
   
   for (int tg = 1; tg<nTaggers; tg++)
-    ptRelAna->PlotBTagPerformance("Final", TaggerName[tg], EtaList, ConfigurationList, SystematicList, 670, "_Central" + FitFlag, "ScaleFactors");
+    ptRelAna->PlotBTagPerformance("Final", TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, "_Central" + FitFlag, "ScaleFactors");
 
 }
 
@@ -327,7 +345,7 @@ void ExecStoreScaleFactors(TString FitFlag = "") {
 
   cout << "ExecStoreScaleFactors " << FitFlag << endl; 
 
-  string BTagger = "DeepFlavour"; TString BTaggerName = BTagger;
+  string BTagger = "DeepCSV"; TString BTaggerName = BTagger;
 
   TString OP = "All";
 

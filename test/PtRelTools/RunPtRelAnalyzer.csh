@@ -8,32 +8,37 @@ setenv TEMPLATEVARIABLE 'PtRel'
 #setenv TEMPLATEVARIABLE 'System8' 
 
 #setenv PUWEIGHTING ''
-setenv PUWEIGHTING '_PSRun20182018Ultimate'
+#setenv PUWEIGHTING '_PSRun20182018Ultimate'
+#setenv PUWEIGHTING '_PSRun2018ABC2018Ultimate'
+#setenv PUWEIGHTING '_PSRun2018D2018Ultimate'
+setenv PUWEIGHTING '_PSRun2017Moriond18'
 
-#setenv KINWEIGHTING ''
+setenv KINWEIGHTING ''
 #setenv KINWEIGHTING '_KinPtBinsCentral'
-setenv KINWEIGHTING '_KinEtaAfterPtBinsCentral'
+#setenv KINWEIGHTING '_KinEtaAfterPtBinsCentral'
 #setenv KINWEIGHTING '_KinPtInEtaBinsCentral'
 
 #setenv SELECTION ''
 #setenv SELECTION '_TrgEmul'
 setenv SELECTION '_TrgConf'
 
-#setenv MACRONAME 'ComputePileUpWeightsPSQCDMuQCDXJetHT'
+setenv MACRONAME 'ComputePileUpWeightsPSQCDMuQCDXJetHT'
 #setenv MACRONAME 'ComputePileUpWeights_PSVRun2016BJuly15:JetHTQCDMuQCDX'
 #setenv MACRONAME 'ComputePileUpWeightsTestPV'
-setenv MACRONAME 'BuildTemplatesAll'
+#setenv MACRONAME 'BuildTemplatesAll'
 #setenv MACRONAME 'ComputeKinematicWeightsQCDMuJetHTQCDXAll'
 #setenv MACRONAME 'CompareDataToMC_anyEta'
 #setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio'
-#setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio_bTempRatioCorr'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeepCSVL:_Central:_LightTemplatesRatio_cJets'
+#setenv MACRONAME 'ComputePtRelScaleFactorsDeepCSVL:_Central:_LightTemplatesRatio_cJets_bTempRatioCorr'
 #setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_Central:_LightTemplatesRatio_cJets_bTempRatioCorr'
 #setenv MACRONAME 'ComputePtRelScaleFactorsDeep:_All:_LightTemplatesRatio_cJets_bTempRatioCorr'
-#setenv MACRONAME 'PlotBTagPerformancePrompt18'
+#setenv MACRONAME 'PlotBTagPerformanceNonoalgo'
 #setenv MACRONAME 'PlotBTagPerformanceKinEta'
 #setenv MACRONAME 'AnalyzeSystematics_LightTemplatesRatio_cJets_bTempRatioCorr'
 #setenv MACRONAME 'StoreScaleFactors_LightTemplatesRatio_cJets_bTempRatioCorr'
 #setenv MACRONAME 'ProduceLightHistogramsQCD' # For testing
+#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
 
 setenv DATARANGEINDEX '0'
 echo ""
@@ -42,7 +47,7 @@ cd $WORKINGDIRECTORY/
 echo "WORKINGDIRECTORY" $PWD
 echo ""
 
-eval `scramv1 runtime -csh`
+#eval `scramv1 runtime -csh`
 #source /afs/cern.ch/project/eos/installation/cms/etc/setup.csh
 
 echo "TEMPLATEVARIABLE " $TEMPLATEVARIABLE
