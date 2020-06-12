@@ -103,6 +103,8 @@ def writeTreeHeaderFile(datasets):
 
     fTree = open('./' + sampleListDir + treeHeaderName + '.h','w')
 
+    fTree.write('TString TreeContentFlag = "";\n\n')
+
     for dataset in datasets:
 
         isMC = datasetDict[dataset]['datatype']=='MC'
@@ -155,7 +157,8 @@ def writeTreeHeaderFile(datasets):
         datasetRangeFlag = datasetDict[dataset]['dataname'] + datasetDict[dataset]['rangename'] + 'Range'
         fTree.write('const int n' + datasetRangeFlag + 's = ' + str(nSamples) + ';\n')
 
-        fTree.write('TString ' + datasetRangeFlag + 'Name[n' + datasetRangeFlag + 's] = ' + sampleRanges.strip(',') + ' };\n')
+        Name = '' if isMC else 'Name'
+        fTree.write('TString ' + datasetRangeFlag + Name + '[n' + datasetRangeFlag + 's] = ' + sampleRanges.strip(',') + ' };\n')
         fTree.write('int n' + datasetDict[dataset]['dataname'] + 'Trees[n' + datasetRangeFlag + 's] = ' + samplenTrees.strip(',') + ' };\n')
 
         if isMC:
