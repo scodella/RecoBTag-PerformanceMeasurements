@@ -334,7 +334,7 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
       int iMu; 
       int jMu = GetPFMuonJet(&iMu);
       
-      if (jMu>=0 && nPV>0 && Jet_pt[jMu]<PtRelPtEdge[nPtRelPtBins] && fabs(Jet_eta[jMu])<PtRelEtaEdge[nPtRelEtaBins-1] /*&& Jet_looseID[jMu]==1*/) {
+      if (jMu>=0 && nPV>0 && Jet_pt[jMu]<PtRelPtEdge[nPtRelPtBins] && fabs(Jet_eta[jMu])<PtRelEtaEdge[nPtRelEtaBins-1] && Jet_tightID[jMu]==1 && Jet_pileup_looseID[jMu]==1) {
 	
 	int ptBin = -1;
 	for (int ptb = 0; ptb<nPtRelPtBins; ptb++)  
@@ -1301,7 +1301,7 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 	    
 	if (Jet_pt[ijet]>PtRelPtEdge[0] && !HasPFMuon(ijet, false) && !HasTaggedJet(ijet) && nPV>0 && 
 	    Jet_pt[ijet]<PtRelPtEdge[nPtRelPtBins] && fabs(Jet_eta[ijet])<PtRelEtaEdge[nPtRelEtaBins-1]
-	    /*&& Jet_looseID[ijet]==1*/)  {
+	    && Jet_tightID[ijet]==1 && Jet_pileup_looseID[ijet]==1)  {
 	      
 	  int ptBin = -1;
 	  for (int ptb = 0; ptb<nPtRelPtBins; ptb++)  
@@ -1820,7 +1820,7 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
       int iMu; 
       int jMu = GetPFMuonJet(&iMu);
       
-      if (jMu>=0 && nPV>0 && Jet_pt[jMu]<PtRelPtEdge[nPtRelPtBins] && fabs(Jet_eta[jMu])<PtRelEtaEdge[nPtRelEtaBins-1] /*&& Jet_looseID[jMu]==1*/) {
+      if (jMu>=0 && nPV>0 && Jet_pt[jMu]<PtRelPtEdge[nPtRelPtBins] && fabs(Jet_eta[jMu])<PtRelEtaEdge[nPtRelEtaBins-1] && Jet_tightID[jMu]==1 && Jet_pileup_looseID[jMu]==1) {
 	
 	int ptBin = -1;
 	for (int ptb = 0; ptb<nPtRelPtBins; ptb++)  
@@ -4325,30 +4325,38 @@ double bjetptrelReweight(double rw, TString SystematicCode){
 double cjetptrelReweight(double rw, TString FitOption){
   
   // 2017 ?
+  //double maxrw = 2.5
   //double a =  8.56226e-01;
   //double b =  5.44108e-02;
   //double c =  2.37079e-01;
   //double d = -7.88016e-02;
   // 2018 - Prompt18
-  double a = 8.02765e-01;
-  double b = 1.10024e-01;
-  double c = 2.41057e-01;
-  double d = -7.47011e-02;
-
+  //double maxrw = 2.5
+  //double a = 8.02765e-01;
+  //double b = 1.10024e-01;
+  //double c = 2.41057e-01;
+  //double d = -7.47011e-02;
+  // UL17  
+  double maxrw = 5.0;
+  double a = 7.60596e-01;
+  double b = 1.66081e-01;
+  double c = 1.56499e-01;
+  double d = -3.41547e-02;
+  
   if (FitOption.Contains("cJetsDown")) {
-   a += -0.037693;
-   b +=  0.060948;
-   c += -0.056376;
-   d +=  0.007255;
+   a +=  -1.80893e-02;
+   b +=  -4.72065e-02;
+   c +=  -2.96853e-02;
+   d +=  -4.49402e-03;
   } else if (FitOption.Contains("cJetsUp")) {
-   a +=  0.037693;
-   b += -0.060950;
-   c +=  0.056377;
-   d += -0.007256;
+   a +=   1.80893e-02;
+   b +=   4.72065e-02;
+   c +=   2.96853e-02;
+   d +=   4.49402e-03;
   }
 
   double rwt = a+b*rw+c*rw*rw+d*rw*rw*rw;
-  if (rw > 2.5) rwt = 1.0;
+  if (rw > maxrw) rwt = 1.0;
   if (rw < 0.) rwt = 1.0;
   return rwt;
   

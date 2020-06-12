@@ -11,7 +11,8 @@ setenv TEMPLATEVARIABLE 'PtRel'
 #setenv PUWEIGHTING '_PSRun20182018Ultimate'
 #setenv PUWEIGHTING '_PSRun2018ABC2018Ultimate'
 #setenv PUWEIGHTING '_PSRun2018D2018Ultimate'
-setenv PUWEIGHTING '_PSRun2017Moriond18'
+#setenv PUWEIGHTING '_PSRun2017Moriond18'
+setenv PUWEIGHTING '_PSRun2017UL17'
 
 setenv KINWEIGHTING 'None'
 #setenv KINWEIGHTING '_KinPtBinsCentral'
@@ -30,25 +31,25 @@ mkdir -p JobOutput/out
 mkdir -p JobOutput/err
 mkdir -p JobOutput/log
 
-#setenv MACRONAME 'EventCounterQCDMuQCDX'
+setenv MACRONAME 'EventCounterQCDMuQCDX'
 #setenv MACRONAME 'EventCounterQCDMu' 
-#setenv NJOBS     1
-
-setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepCSV'
-#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
 setenv NJOBS     1
 
+#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepCSV'
+#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
+#setenv NJOBS     1
+
 #setenv MACRONAME 'ProduceHistogramsBTagMu'
-#setenv NJOBS     6
+#setenv NJOBS     5
 
 #setenv MACRONAME 'ProduceHistogramsQCDMu'
-#setenv NJOBS     12
+#setenv NJOBS     13
 
 #setenv MACRONAME 'ProduceLightHistogramsJetHT'
-#setenv NJOBS     6
+#setenv NJOBS     5
 
 #setenv MACRONAME 'ProduceLightHistogramsQCD'
-#setenv NJOBS     13
+#setenv NJOBS     17
 
 cp RunPtRelAnalyzerCondor.sub RunPtRelAnalyzerCondor_$MACRONAME.sub
 

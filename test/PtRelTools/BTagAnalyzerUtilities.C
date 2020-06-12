@@ -18,7 +18,7 @@ int LumiBlock;
 int nFatJet;
 float FatJet_pt[50], FatJet_eta[50], FatJet_phi[50], FatJet_mass[50], FatJet_residual[50], FatJet_tau1[50], FatJet_tau2[50];
 int FatJet_looseID[50], FatJet_nSubJets[50], FatJet_FirstSubJet[50], FatJet_LastSubJet[50];
-int nJet, Jet_looseID[50], Jet_nbHadrons[50];
+int nJet, Jet_looseID[50], Jet_tightID[50], Jet_pileup_looseID[50], Jet_pileup_tightID[50], Jet_nbHadrons[50];
 float Jet_pt[50], Jet_genpt[50], Jet_eta[50], Jet_phi[50], Jet_Ip1P[50], Jet_Ip2P[50], Jet_Ip3P[50], Jet_Ip3N[50], Jet_jes[50];
 float Jet_Svx[50], Jet_SvxHP[50], Jet_Proba[50], Jet_ProbaP[50], Jet_ProbaN[50], Jet_Bprob[50], Jet_CombSvxP[50], Jet_CombSvxN[50], Jet_CombSvx[50];
 float Jet_SimpIVF_HE[50], Jet_SimpIVF_HP[50], Jet_CombIVF[50], Jet_CombIVF_P[50], Jet_cMVAv2[50], Jet_residual[50], Jet_DeepCSVBDisc[50], Jet_DeepJetBDisc[50];
@@ -157,6 +157,9 @@ TTree *GetChain(TFile *ThisTree, bool ReadLightTracks = false, TString TreeName 
       tchain->SetBranchAddress("Jet_phi", Jet_phi);
       tchain->SetBranchAddress("Jet_flavour", Jet_flavour);
       tchain->SetBranchAddress("Jet_looseID", Jet_looseID);
+      tchain->SetBranchAddress("Jet_tightID", Jet_tightID);
+      tchain->SetBranchAddress("Jet_pileup_looseID", Jet_pileup_looseID);
+      tchain->SetBranchAddress("Jet_pileup_tightID", Jet_pileup_tightID);
       tchain->SetBranchAddress("Jet_nbHadrons", Jet_nbHadrons);
       //tchain->SetBranchAddress("Jet_Ip1P", Jet_Ip1P);
       tchain->SetBranchAddress("Jet_Ip2P", Jet_Ip2P);
@@ -893,6 +896,21 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     if (ThisCode=="_PFJet140") triggerIdx =   3;
     if (ThisCode=="_PFJet260") triggerIdx =   5;
     
+  } else if (CampaignName=="UL17") {
+
+    if (ThisCode=="_DiJet20")  triggerIdx =  35;
+    if (ThisCode=="_DiJet40")  triggerIdx =  36;
+    if (ThisCode=="_DiJet70")  triggerIdx =  37;
+    if (ThisCode=="_DiJet110") triggerIdx =  38;
+    if (ThisCode=="_DiJet170") triggerIdx =  39;
+    if (ThisCode=="_Jet300")   triggerIdx =  40;
+    
+    if (ThisCode=="_PFJet40")  triggerIdx =   0;
+    if (ThisCode=="_PFJet60")  triggerIdx =   1;
+    if (ThisCode=="_PFJet80")  triggerIdx =   2;
+    if (ThisCode=="_PFJet140") triggerIdx =   3;
+    if (ThisCode=="_PFJet260") triggerIdx =   5;
+    
   } 
 
   if (triggerIdx==-1) {
@@ -1042,8 +1060,9 @@ bool IsPFMuonEvent(bool TightCut) {
 bool HasTaggedJet(int ThisJet, bool inclusive = false, TString TaggerVeto = "TCHEL") {
 
   for (int ijet = 0; ijet<nJet; ijet++)
-    if (ijet!=ThisJet || inclusive)
-      if (IsTaggedJet(ijet, TaggerVeto)) return true;
+    if (Jet_tightID[ijet]==1 && Jet_pileup_looseID[ijet]==1)
+      if (ijet!=ThisJet || inclusive)
+	if (IsTaggedJet(ijet, TaggerVeto)) return true;
 
   return false;
 
