@@ -898,12 +898,12 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     
   } else if (CampaignName=="UL17") {
 
-    if (ThisCode=="_DiJet20")  triggerIdx =  35;
-    if (ThisCode=="_DiJet40")  triggerIdx =  36;
-    if (ThisCode=="_DiJet70")  triggerIdx =  37;
-    if (ThisCode=="_DiJet110") triggerIdx =  38;
-    if (ThisCode=="_DiJet170") triggerIdx =  39;
-    if (ThisCode=="_Jet300")   triggerIdx =  40;
+    if (ThisCode=="_DiJet20")  triggerIdx =  32;
+    if (ThisCode=="_DiJet40")  triggerIdx =  33;
+    if (ThisCode=="_DiJet70")  triggerIdx =  34;
+    if (ThisCode=="_DiJet110") triggerIdx =  35;
+    if (ThisCode=="_DiJet170") triggerIdx =  36;
+    if (ThisCode=="_Jet300")   triggerIdx =  37;
     
     if (ThisCode=="_PFJet40")  triggerIdx =   0;
     if (ThisCode=="_PFJet60")  triggerIdx =   1;
@@ -919,7 +919,7 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     return false;
 
   }
-
+  
   int bitIdx = int(triggerIdx/32);
   if ( BitTrigger[bitIdx] & ( 1 << (triggerIdx - bitIdx*32) ) ) return true;
   
