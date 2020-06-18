@@ -18,7 +18,7 @@ double GeneratedEvents[nMonteCarloPtHatRanges] = { 28365947, 20937742, 17320549,
 TString EOSPathJetHT = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL17/Data/JetHT_Run2017-09Aug2019_UL2017/";
 const int nJetRunRanges = 5;
 TString JetRunRangeName[nJetRunRanges] = { "Run2017E", "Run2017D", "Run2017F", "Run2017C", "Run2017B" };
-int nJetTrees[nJetRunRanges] = { 0, 0, 0, 0, 0 };
+int nJetTrees[nJetRunRanges] = { 430, 271, 585, 516, 243 };
 
 // QCD MC
 TString EOSPathQCD = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL17/MC/QCD_TuneCP5_13TeV_pythia8_RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6/";
