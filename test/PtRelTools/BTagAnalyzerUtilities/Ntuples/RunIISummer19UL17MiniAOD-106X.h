@@ -8,11 +8,11 @@ int nBTagMuTrees[nBTagMuRanges] = { 585, 429, 271, 516, 243 };
 
 // QCDMu MC
 TString EOSPathQCDMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL17/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6/";
-const int nMonteCarloPtHatRanges = 13;
-TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = { "Pt-20to30", "Pt-50to80", "Pt-600to800", "Pt-120to170", "Pt-800to1000", "Pt-170to300:1of2", "Pt-170to300:2of2", "Pt-470to600", "Pt-30to50:1of2", "Pt-30to50:2of2", "Pt-80to120", "Pt-1000toInf", "Pt-300to470" };
-int nMonteCarloTrees[nMonteCarloPtHatRanges] = { 439, 359, 463, 24, 552, 973, 973, 27, 609, 609, 22, 444, 29 };
-double CrossSection[nMonteCarloPtHatRanges] = { 5.58528E8*0.0053, 1.92225E7*0.02276, 187.109*0.13412, 469797.*0.05362, 32.3486*0.14552, 117989.*0.07335, 117989.*0.07335, 645.528*0.12242, 1.39803E8*0.01182, 1.39803E8*0.01182, 2.758420E6*0.03844, 10.4305*0.15544, 7820.25*0.10196 };
-double GeneratedEvents[nMonteCarloPtHatRanges] = { 28365947, 20937742, 17320549, 648944, 16995944, 36918785, 36918785, 517382, 30992450, 30992450, 613257, 14719636, 494796 };
+const int nMonteCarloPtHatRanges = 14;
+TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = { "Pt-15to20", "Pt-20to30", "Pt-50to80", "Pt-600to800", "Pt-120to170", "Pt-800to1000", "Pt-170to300:1of2", "Pt-170to300:2of2", "Pt-470to600", "Pt-30to50:1of2", "Pt-30to50:2of2", "Pt-80to120", "Pt-1000toInf", "Pt-300to470" };
+int nMonteCarloTrees[nMonteCarloPtHatRanges] = { 436, 439, 359, 463, 24, 552, 973, 973, 27, 609, 609, 22, 444, 29 };
+double CrossSection[nMonteCarloPtHatRanges] = { 1.27319E9*0.003, 5.58528E8*0.0053, 1.92225E7*0.02276, 187.109*0.13412, 469797.*0.05362, 32.3486*0.14552, 117989.*0.07335, 117989.*0.07335, 645.528*0.12242, 1.39803E8*0.01182, 1.39803E8*0.01182, 2.758420E6*0.03844, 10.4305*0.15544, 7820.25*0.10196 };
+double GeneratedEvents[nMonteCarloPtHatRanges] = { 26018003, 28365947, 20937742, 17320549, 648944, 16995944, 36918785, 36918785, 517382, 30992450, 30992450, 613257, 14719636, 494796 };
 
 // JetHT Data
 TString EOSPathJetHT = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL17/Data/JetHT_Run2017-09Aug2019_UL2017/";
