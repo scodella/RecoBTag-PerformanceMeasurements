@@ -8,18 +8,25 @@ import optparse
 
 # General campaign parameters
 PWD = os.getenv('PWD') + '/'
-campaign = 'UL17'
+campaign = 'UL18'
 outputDir = '/store/group/phys_btag/performance/' + campaign + '/'
 sampleListDir = './samples/' + campaign + '/'
 maxFilesPerRange = 600
 splitFilesPerRange = 500
-treeHeaderName = 'RunIISummer19UL17MiniAOD-106X'
+treeHeaderName = 'RunIISummer19UL18MiniAOD-106X'
 storageSite = 'T2_CH_CERN'
 storageDir = '/eos/cms'
 storageAddress = 'root://eoscms.cern.ch/' + storageDir
-lumiMask = 'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt'
-cfgDefaults = '2017_UltraLegacy'
-datasetDict = { 'QCD'    : { 'datatype'   : 'MC',
+#lumiMask = 'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt'
+lumiMask = 'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt'
+cfgDefaults = '2018_UltraLegacy'
+datasetDict = { 'ttbar'  : { 'datatype'   : 'MC',
+                             'directory'  : 'TTToHadronic_TuneCP5_13TeV-powheg-pythia8_RunIISummer19UL18MiniAOD-106X_upgrade2018_realistic_v11_L1v1',
+                             'parameters' : '',
+                             'dataname'   : '',
+                             'rangename'  : '',
+                             'xsecname'   : '' },
+                'QCD'    : { 'datatype'   : 'MC',
                              'directory'  : 'QCD_TuneCP5_13TeV_pythia8_RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6',
                              'parameters' : ', \'producePtRelTemplate=True\'',
                              'dataname'   : 'MCInclusive', 

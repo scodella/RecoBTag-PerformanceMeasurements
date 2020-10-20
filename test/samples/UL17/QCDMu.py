@@ -1,4 +1,4 @@
-#samples['QCD_Pt-15to20']    = {'das' : '', 'crossSection' : '1.27319E9*0.003' }
+samples['QCD_Pt-15to20']    = {'das' : '/QCD_Pt-15to20_MuEnrichedPt5_TuneCP5_13TeV_pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v1/MINIAODSIM', 'crossSection' : '1.27319E9*0.003' }
 samples['QCD_Pt-20to30']    = {'das' : '/QCD_Pt-20to30_MuEnrichedPt5_TuneCP5_13TeV_pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM', 'crossSection' : '5.58528E8*0.0053' }
 samples['QCD_Pt-30to50']    = {'das' : '/QCD_Pt-30to50_MuEnrichedPt5_TuneCP5_13TeV_pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM', 'crossSection' : '1.39803E8*0.01182' }
 samples['QCD_Pt-50to80']    = {'das' : '/QCD_Pt-50to80_MuEnrichedPt5_TuneCP5_13TeV_pythia8/RunIISummer19UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM', 'crossSection' : '1.92225E7*0.02276' }
