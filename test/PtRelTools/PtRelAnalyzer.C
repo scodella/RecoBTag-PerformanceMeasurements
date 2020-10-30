@@ -345,7 +345,7 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	bool PassTrigger[nTriggers];
 	
 	int triggerPeriod = -1;
-	if (CampaignName=="2018Ultimate") {
+	if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 	  if (DataType.Contains("QCDMu")) {
 	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
 	  } else if (DataType=="BTagMu") {
@@ -693,7 +693,7 @@ void PtRelAnalyzer::FillSubjetHistograms(TString DataType, int DataRange) {
 	bool PassTrigger[nTriggers];
 	
 	int triggerPeriod = -1;
-	if (CampaignName=="2018Ultimate") {
+	if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 	  if (DataType.Contains("QCDMu")) {
 	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
 	  } else if (DataType=="BTagMu") {
@@ -1287,7 +1287,7 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
       }
 	
       int triggerPeriod = -1;
-      if (CampaignName=="2018Ultimate") {
+      if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 	if (DataType.Contains("QCD")) {
 	  triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
 	} else {
@@ -1830,7 +1830,7 @@ void PtRelAnalyzer::FillSystem8Histograms(TString DataType, int DataRange) {
 	bool PassTrigger[nTriggers];
 	
 	int triggerPeriod = -1;
-	if (CampaignName=="2018Ultimate") {
+	if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 	  if (DataType.Contains("QCDMu")) {
 	    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
 	  } else if (DataType=="BTagMu") {
@@ -5884,7 +5884,7 @@ void PtRelAnalyzer::ComputePileUpWeights(TString PUMethod, TString DataType, int
 		if (EventPileUp>=nMaxPU) EventPileUp = nMaxPU - 1;
 
 		int triggerPeriod = -1;
-		if (CampaignName=="2018Ultimate") {
+		if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 		  if (DataType.Contains("QCD")) {
 		    triggerPeriod = (float(i)/float(nentries)<0.46857580) ? 0 : 1;
 		  } else {
@@ -6682,7 +6682,7 @@ void PtRelAnalyzer::ComputeMethodsOverlap() {
 	    bool PassTrigger[nMethods] = {false, false, false};
 	
 	    int triggerPeriod = -1;
-	    if (CampaignName=="2018Ultimate") {
+	    if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 	      triggerPeriod = (Run<320500) ? 0 : 1;
 	    }
 	    
