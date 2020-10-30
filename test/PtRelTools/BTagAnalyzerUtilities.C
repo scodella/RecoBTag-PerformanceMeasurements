@@ -8,8 +8,8 @@
 #include <fstream>
 #include <iostream>
 
-#include "BTagAnalyzerUtilities/Ntuples/RunIISummer19UL17MiniAOD-106X.h"
-#include "BTagAnalyzerUtilities/Taggers/RunIISummer19UL17MiniAOD-106X.h"
+#include "BTagAnalyzerUtilities/Ntuples/RunIISummer19UL18MiniAOD-106X.h"
+#include "BTagAnalyzerUtilities/Taggers/RunIISummer19UL18MiniAOD-106X.h"
 
 int Run, Evt, nPU, nPV, nTrkInc, nBHadrons, nDHadrons, nGenlep, nGenquark, nBitTrigger;
 int BitTrigger[100], Jet_flavour[50], Jet_nFirstTrkInc[50], Jet_nLastTrkInc[50], Muon_IdxJet[50]; 
@@ -319,9 +319,7 @@ int GetNumberOfDataRanges(TString DataType) {
   if (DataType=="JetHT") nDataRanges = nJetRunRanges;
   if (DataType=="QCDMu") nDataRanges = nMonteCarloPtHatRanges;
   if (DataType=="QCD") nDataRanges = nMCInclusivePtHatRanges;
-  //if (DataType=="TTP") nDataRanges = nTTbarPowhegRanges;
-  //if (DataType=="TTM") nDataRanges = nTTbarMadGraphRanges;
-  //if (DataType=="Hbb") nDataRanges = nGluGluHbbRanges;
+  if (DataType=="ttbar") nDataRanges = nttbarRanges;
 
   return nDataRanges;
 
@@ -333,9 +331,7 @@ TString GetDataRangeName(TString DataType, int DataRange) {
   if (DataType=="QCDMu") DataRangeName = MonteCarloPtHatRange[DataRange];
   else if (DataType=="JetHT") DataRangeName = JetRunRangeName[DataRange];
   else if (DataType=="QCD") DataRangeName = MCInclusivePtHatRange[DataRange];
-  //else if (DataType=="TTP") DataRangeName = TTbarPowhegRange[DataRange];
-  //else if (DataType=="TTM") DataRangeName = TTbarMadGraphRange[DataRange];
-  //else if (DataType=="Hbb") DataRangeName = GluGluHbbRange[DataRange];
+  else if (DataType=="ttbar") DataRangeName = ttbarRange[DataRange];
 
   return DataRangeName;
 
@@ -345,6 +341,7 @@ float GetPtHatWeight(TString DataType, int PtHatRange) {
 
   if (DataType=="QCDMu") return CrossSection[PtHatRange]/GeneratedEvents[PtHatRange];
   if (DataType=="QCD") return CrossSectionInclusive[PtHatRange]/GeneratedEventsInclusive[PtHatRange];
+  if (DataType=="ttbar") return CrossSectionttbar[PtHatRange]/GeneratedEventsttbar[PtHatRange];
   return 1.;
 
 }
@@ -355,9 +352,7 @@ int GetNumberOfTrees(TString DataType, int DataRange) {
   if (DataType=="QCDMu") nTrees = nMonteCarloTrees[DataRange];
   else if (DataType=="JetHT") nTrees = nJetTrees[DataRange]; 
   else if (DataType=="QCD") nTrees = nMCInclusiveTrees[DataRange];
-  //else if (DataType=="TTP") nTrees = nTTbarPowhegTrees[DataRange];
-  //else if (DataType=="TTM") nTrees = nTTbarMadGraphTrees[DataRange];
-  //else if (DataType=="Hbb") nTrees = nGluGluHbbTrees[DataRange];
+  else if (DataType=="ttbar") nTrees = nttbarTrees[DataRange];
   
   return nTrees;
 
@@ -379,11 +374,9 @@ void GetDataRangeInformation(TString DataType, int DataRange, TString *DataRange
   if (DataType=="QCDMu") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathQCDMu);
   if (DataType=="JetHT") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathJetHT);
   if (DataType=="QCD") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathQCD);
-  //if (DataType=="TTP") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathTTbarPowheg);
-  //if (DataType=="TTM") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathTTbarMadGraph);
-  //if (DataType=="Hbb") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathGluGluHbb);
+  if (DataType=="ttbar") ThisFileDirectoryName.ReplaceAll("EOSPath", EOSPathttbar);
 
-  if (ThisFileDirectoryName.Contains("QCD")) 
+  if (ThisFileDirectoryName.Contains("QCD") || DataType=="ttbar") 
     ThisFileDirectoryName.ReplaceAll("/JetTree_data", "/JetTree_mc");
 
   if ((*DataRangeName).Contains("July09")) ThisFileDirectoryName.ReplaceAll("CMSSW_8_0_12", "CMSSW_8_0_8_patch1");
@@ -468,6 +461,16 @@ double GetBTagDiscriminatorValue(int ijet, TString AlgorithmName, TString JetTyp
   } 
   
   return -9999.;
+
+}
+
+float GetDiscriminatorCut(TString ThisTaggerName) {
+
+  for (int tg = 0; tg<nBTagAnalyzerTaggers; tg++)
+    if (ThisTaggerName==BTagAnalyzerTaggerName[tg])
+      return BTagAnalyzerTaggerCut[tg];
+
+  return -1;
 
 }
 
@@ -868,7 +871,7 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     if (ThisCode=="_PFJet140") triggerIdx =   3;
     if (ThisCode=="_PFJet260") triggerIdx =   5;
     
-  } else if (CampaignName=="2018Ultimate") {
+  } else if (CampaignName=="2018Ultimate" || CampaignName=="UL18") {
 
     if (TriggerPeriod==0) {
 
@@ -911,7 +914,7 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     if (ThisCode=="_PFJet140") triggerIdx =   3;
     if (ThisCode=="_PFJet260") triggerIdx =   5;
     
-  } 
+  }  
 
   if (triggerIdx==-1) {
     
@@ -922,7 +925,7 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
   
   int bitIdx = int(triggerIdx/32);
   if ( BitTrigger[bitIdx] & ( 1 << (triggerIdx - bitIdx*32) ) ) return true;
-  
+
   return false;
 
 }

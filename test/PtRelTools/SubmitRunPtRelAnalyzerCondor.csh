@@ -12,7 +12,8 @@ setenv TEMPLATEVARIABLE 'PtRel'
 #setenv PUWEIGHTING '_PSRun2018ABC2018Ultimate'
 #setenv PUWEIGHTING '_PSRun2018D2018Ultimate'
 #setenv PUWEIGHTING '_PSRun2017Moriond18'
-setenv PUWEIGHTING '_PSRun2017UL17'
+#setenv PUWEIGHTING '_PSRun2017UL17'
+setenv PUWEIGHTING '_PSRun2018UL18'
 
 setenv KINWEIGHTING 'None'
 #setenv KINWEIGHTING '_KinPtBinsCentral'
@@ -31,19 +32,19 @@ mkdir -p JobOutput/out
 mkdir -p JobOutput/err
 mkdir -p JobOutput/log
 
-setenv MACRONAME 'EventCounterQCDMuQCDX'
+#setenv MACRONAME 'EventCounterQCDMuQCDX'
 #setenv MACRONAME 'EventCounterQCDMu' 
-setenv NJOBS     1
+#setenv NJOBS     1
 
 #setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepCSV'
-#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
-#setenv NJOBS     1
+setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
+setenv NJOBS     1
 
 #setenv MACRONAME 'ProduceHistogramsBTagMu'
 #setenv NJOBS     5
 
 #setenv MACRONAME 'ProduceHistogramsQCDMu'
-#setenv NJOBS     13
+#setenv NJOBS     14
 
 #setenv MACRONAME 'ProduceLightHistogramsJetHT'
 #setenv NJOBS     5

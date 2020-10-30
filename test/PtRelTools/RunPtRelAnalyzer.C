@@ -24,13 +24,16 @@ void ExecComputeBTaggingWorkingPoints(TString AlgorithmName) {
 
   cout << "ExecComputeBTaggingWorkingPoints " << AlgorithmName << endl; 
 
+  bool UseQCD = (AlgorithmName.Contains("UseQCD")) ? true : false;
+  AlgorithmName.ReplaceAll("UseQCD", "");
+
   bool RemovePileUpJets = (AlgorithmName.Contains("RemovePU")) ? true : false;
   AlgorithmName.ReplaceAll("RemovePU", "");
 
   bool ApplyPileUpReweighting = (AlgorithmName.Contains("ReweightPU")) ? true : false;
   AlgorithmName.ReplaceAll("ReweightPU", "");
 
-  ptRelAna->ComputeBTaggingWorkingPoints(AlgorithmName, RemovePileUpJets, ApplyPileUpReweighting);
+  ptRelAna->ComputeBTaggingWorkingPoints(AlgorithmName, UseQCD, RemovePileUpJets, ApplyPileUpReweighting);
 
 }
 
@@ -162,7 +165,7 @@ void ExecCompareDataToMC(TString EtaBin, int Rebinning) {
   for (int nb = 0; nb<nPtRelEtaBins; nb++) {
     if (EtaBin.Contains(PtRelEtaBin[nb])) {
       
-      TString LightTemplates = "All";
+      TString LightTemplates = "";//"All";
       if (TemplateVariable=="System8") LightTemplates = "";
 
       ptRelAna->CompareDataToMC("jetPt",  PtRelEtaBin[nb], "All", Rebinning,   LightTemplates);
@@ -312,6 +315,15 @@ void ExecPlotBTagPerformance(TString Dependence) {
       if (TaggerName[tg].Contains("Deep"))
         ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
 
+  }  else if (Dependence=="UL17RB2c") {
+
+    TString ConfigurationList[2] = {"_PSRun2017UL17_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++)
+      if (TaggerName[tg].Contains("Deep"))
+        ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
+
   }
   
 }
@@ -345,7 +357,8 @@ void ExecStoreScaleFactors(TString FitFlag = "") {
 
   cout << "ExecStoreScaleFactors " << FitFlag << endl; 
 
-  string BTagger = "DeepCSV"; TString BTaggerName = BTagger;
+  //string BTagger = "DeepCSV"; TString BTaggerName = BTagger;
+  string BTagger = "DeepJet"; TString BTaggerName = BTagger;
 
   TString OP = "All";
 

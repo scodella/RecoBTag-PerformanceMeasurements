@@ -148,7 +148,7 @@ void PtRelAnalyzer::BookHistograms() {
 	  JetEtaForWeighting[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 60, -3., 3.);
 	  
 	  ThisHistoName = HistogramName("nGoodPV_DataType", ptb, nb, tr, is, -1, -1);
-	  PVMultiplicity[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 35, 0., 35.); 
+	  PVMultiplicity[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 80, 0., 80.); 
 	  
 	  for (int tg = 0; tg<nTaggers; tg++) {
 	    	   
@@ -356,14 +356,14 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	if (PUWeighting.Contains("Run2018D") && triggerPeriod==0) continue;
 
 	for (int trg = 0; trg<nTriggers; trg++) {
-	  
+
 	  PassTrigger[trg] = false;
 	  
 	  if (Jet_pt[jMu]>MinPtJetTrigger[trg] && Jet_pt[jMu]<MaxPtJetTrigger[trg]) {
-	    
+
 	    bool FiredTrigger = false;
 	    if (DataType=="BTagMu" || !Selection.Contains("TrgEmul")) {
-	      if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) FiredTrigger = true;
+	      if (PassTriggerBit(TriggerName[trg], CampaignName, triggerPeriod)) FiredTrigger = true; 
 	      if (FiredTrigger && (Selection.Contains("TrgConf") || Selection.Contains("TrgEmul"))) 
 		if (!PassTriggerEmulation(trg, jMu)) FiredTrigger = false;
 	    } else {
@@ -371,7 +371,7 @@ void PtRelAnalyzer::FillHistograms(TString DataType, int DataRange) {
 	    }
 	    
 	    if (FiredTrigger) {
-	      
+
 	      PassTrigger[trg] = true;
 	      tr = trg;
 	      
@@ -1348,7 +1348,7 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 	     int SavePtBin = ptBin;
 		
 	     for (int is = 0; is<nSystematics; is++) {
-	       
+
 	       ptBin = SavePtBin;
 	       
                double ThisJetWeight = 1.;
@@ -1384,7 +1384,7 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 	       }
 	       
 	       if (ptBin==-1) continue;
-	       
+
 	       float TrackDRCut = 999., TrackMinDRCut = 0.;
 	       GetDRCuts(SystematicName[is], Jet_pt[ijet], &TrackDRCut, &TrackMinDRCut);
 		  
@@ -1402,14 +1402,14 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 		 //if (fabs(Jet_eta[ijet]-TrkInc_eta[tk])<TrackDRCut && DeltaPhi(Jet_phi[ijet], TrkInc_phi[tk])<TrackDRCut) nLightTracks++;
 		    
 	       }
-	       
+
 	       for (int tk = Jet_nFirstTrkInc[ijet]; tk<Jet_nLastTrkInc[ijet]; tk++) {
 		    
 		 double JetTrkDR = DeltaR(Jet_eta[ijet], Jet_phi[ijet], TrkInc_eta[tk], TrkInc_phi[tk]);
 		    
 		 if (TrkInc_pt[tk]>TrackPtCut && JetTrkDR<TrackDRCut && JetTrkDR>=TrackMinDRCut) {
 		 //if (TrkInc_pt[tk]>TrackPtCut && fabs(Jet_eta[ijet]-TrkInc_eta[tk])<TrackDRCut && DeltaPhi(Jet_phi[ijet], TrkInc_phi[tk])<TrackDRCut) {
-		      
+
 		 double ThisTrackWeight = ThisJetWeight;
 
 		 /*if (DataType=="QCD" && ApplyDeltaRCorrections) {
@@ -1457,17 +1457,16 @@ void PtRelAnalyzer::FillLightHistograms(TString DataType, int DataRange) {
 		      
 		 if (TemplateVariable=="IP3DSig")
 	           Discriminator = log(fabs(TrkInc_IPsig[tk]));
-		      		      
+
 		 for (int nb = 0; nb<nPtRelEtaBins; nb++) 
 	           if (nb==0 || JetEtaBin==nb) {
 
                      if (!FilledJet[nb]) {			  
 		       JetPtForWeighting[tr][is][ptBin][nb]->Fill(Jet_pt[ijet], ThisJetWeight);
                        JetEtaForWeighting[tr][is][ptBin][nb]->Fill(Jet_eta[ijet], ThisJetWeight);
-                       FilledJet[nb] = true;
-		
+                       FilledJet[nb] = true;		
                      }
-
+		     
 	             PtRelLightUntagForSystematic[nTaggers-1][tr][is][ptBin][nb]->Fill(Discriminator, ThisTrackWeight/nLightTracks);
 			  
 	           } // Loop on eta bins
@@ -1660,7 +1659,7 @@ void PtRelAnalyzer::BookSystem8Histograms() {
 	  JetEtaForWeighting[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 60, -3., 3.);
 	  
 	  ThisHistoName = HistogramName("nGoodPV_DataType", ptb, nb, tr, is, -1, -1);
-	  PVMultiplicity[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 35, 0., 35.); 
+	  PVMultiplicity[tr][is][ptb][nb] = new TH1D(ThisHistoName, ThisHistoName, 80, 0., 80.); 
 		  
 	  for (int st = 0; st<2; st++)
 	    for (int tg = 0; tg<nTaggers+1; tg++) {
@@ -2498,7 +2497,7 @@ void PtRelAnalyzer::BookSystem8Templates() {
 	  MuonPt[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 60, 0., 60.); 
 	  
 	  ThisHistoName = HistogramName("PV_" + DataType, FitPtBin[fpt], nb, -1, is, -1, -1);
-	  PVEvent[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 35, 0., 35.);
+	  PVEvent[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 80, 0., 80.);
 	  
 	  for (int st = 0; st<2; st++)
 	    for (int tg = 0; tg<nTaggers+1; tg++) {
@@ -3150,7 +3149,7 @@ void PtRelAnalyzer::BookTemplates() {
 	    MuonDR[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 50, 0., 0.5);
 	  
 	    ThisHistoName = HistogramName("PV_" + DataType, FitPtBin[fpt], nb, -1, is, -1, -1);
-	    PVEvent[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 35, 0., 35.);
+	    PVEvent[dt][is][fpt][nb] = new TH1D(ThisHistoName, ThisHistoName, 80, 0., 80.);
 
 	    for (int tg = 0; tg<nTaggers; tg++)
 	      for (int tp = 0; tp<2; tp++)
@@ -4409,6 +4408,8 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       HistoName.ReplaceAll("_Untag", "_Tag");
       HistoName.ReplaceAll("CSVv2L", "CSVv2T");
       HistoName.ReplaceAll("CSVv2M", "CSVv2T");
+      HistoName.ReplaceAll("JetL", "JetT");
+      HistoName.ReplaceAll("JetM", "JetT");
 
     }
 
@@ -4471,6 +4472,8 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       HistoQCDName.ReplaceAll("_Untag", "_Tag");
       HistoQCDName.ReplaceAll("CSVv2L", "CSVv2T");
       HistoQCDName.ReplaceAll("CSVv2M", "CSVv2T");
+      HistoQCDName.ReplaceAll("JetL", "JetT");
+      HistoQCDName.ReplaceAll("JetM", "JetT");
       HistoQCDName.ReplaceAll("JPL", "JPT");
       HistoQCDName.ReplaceAll("JPM", "JPT");
       
@@ -4488,6 +4491,8 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
       HistoDataName.ReplaceAll("_Untag", "_Tag");
       HistoDataName.ReplaceAll("CSVv2L", "CSVv2T");
       HistoDataName.ReplaceAll("CSVv2M", "CSVv2T");
+      HistoDataName.ReplaceAll("JetL", "JetT");
+      HistoDataName.ReplaceAll("JetM", "JetT");
       HistoDataName.ReplaceAll("JPL", "JPT");
       HistoDataName.ReplaceAll("JPM", "JPT");
       TH1D *ThisData = (TH1D*) PtRelTemplateFile->Get(HistoDataName);
@@ -4590,6 +4595,14 @@ TH1D *PtRelAnalyzer::GetPtRelTemplate(bool IsMC, TString Flavour, TString Tagger
 	TString HistoQCDNameC = HistoQCDName;
 	HistoQCDNameC.ReplaceAll("_b", "_c");
 	TH1D *ThisQCD_C = (TH1D*) PtRelTemplateFile->Get(HistoQCDNameC);
+	//if (FitOption.Contains("_cJets")) {
+	//  for (int ib = 1; ib<=ThisQCD_C->GetNbinsX(); ib++) {
+	//    float cTempCont = ThisQCD_C->GetBinContent(ib);
+	//    float ptrelBin = ThisQCD_C->GetBinCenter(ib);
+	//    cTempCont *= cjetptrelReweight(ptrelBin, FitOption);
+	//    ThisQCD_C->SetBinContent(ib, cTempCont);
+	//  }
+	//}
 	ThisQCD_C->SetDirectory(0); 
 	ThisQCD_C->Rebin(TemplateRebinning);
 
@@ -4817,7 +4830,8 @@ struct PtRelFitResult PtRelAnalyzer::PtRelFit(TH1D* DataTemplate, TH1D* bTemplat
   struct PtRelFitResult FitContent;
   
   int UpperBinForTemp = DataTemplate->FindBin(UpperEdgeForTemp);
-  
+  //UpperBinForTemp = DataTemplate->FindBin(3.5);
+
   double bIntegral = bTemplate->Integral();
   double cIntegral = cTemplate->Integral();
   double lgIntegral = lgTemplate->Integral();
@@ -6823,7 +6837,7 @@ void PtRelAnalyzer::ComputeBTaggingEfficiency(TString DataType, int DataRange) {
 
 }
 
-void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool RemovePileUpJets, bool ApplyPileUpReweighting) {
+void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool UseQCD, bool RemovePileUpJets, bool ApplyPileUpReweighting) {
 
   // Booking the histograms
   int nDiscriminatorBins = 10000.;
@@ -6838,16 +6852,22 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
   TaggerDiscriminator[1] = new TH1D("Discr" + AlgorithmName + "_c", "", nDiscriminatorBins, LowDiscriminatorEdge, HighDiscriminatorEdge);
   TaggerDiscriminator[2] = new TH1D("Discr" + AlgorithmName + "_l", "", nDiscriminatorBins, LowDiscriminatorEdge, HighDiscriminatorEdge);    
 
-  if (ApplyPileUpReweighting) GetPileUpWeights("QCD");
+  if (ApplyPileUpReweighting) {
+    if (UseQCD) GetPileUpWeights("QCD");
+    else GetPileUpWeights("ttbar");
+  }
 
   // Filling the histograms
-  for (int ph = 0; ph<nMCInclusivePtHatRanges; ph++) {
+  for (int ph = 0; ph<nMCInclusivePtHatRanges*UseQCD+nttbarRanges*(!UseQCD); ph++) {
  
-    //if (MCInclusivePtHatRange[ph].Contains("80to120")) {
-    if (MCInclusivePtHatRange[ph]=="Pt-80to120") {
+    if (UseQCD && ph>=nMCInclusivePtHatRanges) continue;
+    if (!UseQCD && ph>=nttbarRanges) continue;
+
+    if ((UseQCD && MCInclusivePtHatRange[ph]=="Pt-80to120") or (!UseQCD && ttbarRange[ph]=="hadronic")) {
       
+      TString DatasetName = UseQCD ? "QCD" : "ttbar"; 
       TString DataRangeName, FileDirectoryName; float PtHatWeight; int nTrees, FirstTree;
-      GetDataRangeInformation("QCD", ph, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
+      GetDataRangeInformation(DatasetName, ph, &DataRangeName, &PtHatWeight, &FileDirectoryName, &nTrees, &FirstTree);
   
       for (int tf = FirstTree; tf<=nTrees; tf++) {
 
@@ -6877,8 +6897,10 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
 	    if (PUWeighting.Contains("PV") || PUWeighting.Contains("PSV")) EventPileUp = nPV;
 	    float EventWeight = ApplyPileUpReweighting ? PtHatWeight*PileUpWeight[0][EventPileUp][0] : PtHatWeight;
 	    
+            float jetPtCut = UseQCD ? 30. : 20.;
+
 	    for (int ijet = 0; ijet<nJet; ijet++) 
-	      if (Jet_pt[ijet]>30. && fabs(Jet_eta[ijet])<PtRelEtaEdge[nPtRelEtaBins-1]) {
+	      if (Jet_pt[ijet]>jetPtCut && fabs(Jet_eta[ijet])<PtRelEtaEdge[nPtRelEtaBins-1] && Jet_tightID[ijet]==1 && Jet_pileup_looseID[ijet]==1) {
      
 		if (!RemovePileUpJets || Jet_genpt[ijet]>8.) {
 
@@ -6906,6 +6928,10 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
 
   }
 
+  TFile *OutFile = new TFile("./WP_"+AlgorithmName+".root", "recreate");
+  TaggerDiscriminator[0]->Write(); TaggerDiscriminator[1]->Write(); TaggerDiscriminator[2]->Write();
+  OutFile->Close();
+
   // Now computing the working points
   cout << "Working Points for " << AlgorithmName << endl << endl;
   int const nWorkingPoints = 3;
@@ -6914,27 +6940,9 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Rem
 
   double OldWorkingPoint[nWorkingPoints] = {0.2, 0.4, 0.6}; 
 
-  if (AlgorithmName=="CSVv2") { 
-    OldWorkingPoint[0] =  0.460;
-    OldWorkingPoint[1] =  0.800;
-    OldWorkingPoint[2] =  0.935;
-  } else if (AlgorithmName=="CMVAv2" || AlgorithmName=="cMVAv2") { 
-    OldWorkingPoint[0] = -0.715;
-    OldWorkingPoint[1] =  0.185;
-    OldWorkingPoint[2] =  0.875;
-  } else if (AlgorithmName=="JP") { 
-    OldWorkingPoint[0] =  0.245;
-    OldWorkingPoint[1] =  0.515;
-    OldWorkingPoint[2] =  0.760;
-  } else if (AlgorithmName.Contains("DeepCSV")) { 
-    OldWorkingPoint[0] =  0.1522;
-    OldWorkingPoint[1] =  0.4941;
-    OldWorkingPoint[2] =  0.8001;
-  }else if (AlgorithmName.Contains("DeepJet")) { 
-    OldWorkingPoint[0] =  0.0521;
-    OldWorkingPoint[1] =  0.3033;
-    OldWorkingPoint[2] =  0.7489;
-  }
+  OldWorkingPoint[0] = GetDiscriminatorCut(AlgorithmName+"L");
+  OldWorkingPoint[1] = GetDiscriminatorCut(AlgorithmName+"M");
+  OldWorkingPoint[2] = GetDiscriminatorCut(AlgorithmName+"T");
 
   double IntegralLightJets  = TaggerDiscriminator[2]->Integral(0, nDiscriminatorBins+1);
   double IntegralBottomJets = TaggerDiscriminator[0]->Integral(0, nDiscriminatorBins+1);

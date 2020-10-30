@@ -4,14 +4,14 @@
 #include "TString.h"
 #include "TFile.h"
 
-#include "CampaignParameters/Run2017106X-UL17/BaseParameters.h"
-#include "CampaignParameters/Run2017106X-UL17/TriggerInfo.h"
-#include "CampaignParameters/Run2017106X-UL17/Taggers.h"
-#include "CampaignParameters/Run2017106X-UL17/Systematics.h"
+#include "CampaignParameters/Run2018106X-UL18/BaseParameters.h"
+#include "CampaignParameters/Run2018106X-UL18/TriggerInfo.h"
+#include "CampaignParameters/Run2018106X-UL18/Taggers.h"
+#include "CampaignParameters/Run2018106X-UL18/Systematics.h"
 
 // Choose the production 
-//#include "CampaignParameters/Run2017106X-UL17/BaseProduction.h"
-#include "CampaignParameters/Run2017106X-UL17/Run2016Production.h"
+//#include "CampaignParameters/Run2018106X-UL18/BaseProduction.h"
+#include "CampaignParameters/Run2018106X-UL18/Run2016Production.h"
   
 float TotalScaleFactorSystematic[nFitPtBins][nPtRelEtaBins];
 float ScaleFactorSystematic[nFitPtBins][nPtRelEtaBins][nScaleFactorSystematics];
@@ -72,7 +72,7 @@ class PtRelAnalyzer {
 
   void ComputeBTaggingEfficiency(TString DataType, int DataRange = -1);
 
-  void ComputeBTaggingWorkingPoints(TString AlgorithmName, bool RemovePileUpJets = false, bool ApplyPileUpReweighting = false);
+  void ComputeBTaggingWorkingPoints(TString AlgorithmName, bool UseQCD, bool RemovePileUpJets = false, bool ApplyPileUpReweighting = false);
  
  private:
 
