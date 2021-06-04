@@ -4984,7 +4984,8 @@ struct PtRelFitResult PtRelAnalyzer::PtRelFit(TH1D* DataTemplate, TH1D* bTemplat
       FitContent.cFraction = cIntegral/mcIntegral;
     }
 
-    FitContent.bFractionError  = FitContent.bFraction<0.3 ? FitContent.bFraction : 0.3;
+    //FitContent.bFractionError  = FitContent.bFraction<0.3 ? FitContent.bFraction : 0.3;
+    FitContent.bFractionError  = FitContent.bFraction<0.5 ? 0.3*FitContent.bFraction : 0.2*FitContent.bFraction;     
     FitContent.lightFractionError = 0.3;
     FitContent.cFractionError  = 0.3;
 
@@ -5684,7 +5685,8 @@ void PtRelAnalyzer::PlotBTagPerformance(TString PlotFlag, TString Tagger, TStrin
 
   ThisCanvas->Print("./Plots/" + ThisPlotName + ".png");
   ThisCanvas->Print("./Plots/" + ThisPlotName + ".pdf");
-  
+  ThisCanvas->Print("./Plots/" + ThisPlotName + ".C"); 
+ 
 }
 
 void PtRelAnalyzer::ComputeScaleFactorSystematics(TString Tagger, int PtBin, int EtaBin, TString Configuration, TString CentralFlag) {
@@ -6143,12 +6145,12 @@ void PtRelAnalyzer::ComputePileUpWeights(TString PUMethod, TString DataType, int
       TString PUSyst = "";
       if (PUMethod.Contains("m05")) PUSyst = "_m05";
       if (PUMethod.Contains("p05")) PUSyst = "_p05";
-      
+
       TString PileUpRootFileName = "./Weights/PileUp/PileUp" + PUWeighting + PUSyst + ".root";
       PileUpRootFileName.ReplaceAll("_PS", "_");
       TFile *PileUpDataFile = TFile::Open(PileUpRootFileName);
       TH1F *PileUpData = (TH1F*) PileUpDataFile->Get("pileup");
-      
+
       int PileUpDataBins = PileUpData->GetNbinsX();
       float PileUpDataIntegral = PileUpData->Integral(0, PileUpDataBins+1);
       PileUpData->Scale(1./PileUpDataIntegral);
@@ -6871,15 +6873,27 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Use
   
       for (int tf = FirstTree; tf<=nTrees; tf++) {
 
-	//if (tf==121) continue;
-
 	TString FileName = GetFileName(FileDirectoryName, tf);
-	        
+	  
+        //for (int tf = FirstTree; tf<=547+427; tf++) {
+      
+        //TString FileName = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/";
+        //if (tf<=547) {
+          //FileName += "QCD_TuneCP5_13TeV_pythia8_RunIISummer19UL16MiniAOD-106X_mcRun2_asymptotic_v13/Pt-80to120/JetTree_mc_";
+          //FileName += tf;
+          //PtHatWeight = (16.8/36.3)*(2762530./29817598);
+        //} else {
+          //FileName += "QCD_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAODAPV-106X_mcRun2_asymptotic_preVFP_v8/Pt-80to120/JetTree_mc_";
+          //FileName += tf-547;
+          //PtHatWeight = (19.5/36.3)*(2762530./29742999);
+        //}
+        //FileName += ".root";
+
 	TFile *ThisTree = TFile::Open(FileName);
     
 	if (!ThisTree) continue;
 
-	cout << FileName << endl;
+	cout << FileName << " " << PtHatWeight << endl;
 
 	TTree *tchain = GetChain(ThisTree, false);
       
@@ -6970,10 +6984,10 @@ void PtRelAnalyzer::ComputeBTaggingWorkingPoints(TString AlgorithmName, bool Use
 	 << ", " << TaggerDiscriminator[2]->GetBinLowEdge(BinAtWorkingPoint+1) << ")" << endl;
     cout << "        MistagRate: " << TaggerDiscriminator[2]->Integral(BinAtWorkingPoint, nDiscriminatorBins+1)/IntegralLightJets 
 	 << " (" << TaggerDiscriminator[2]->Integral(BinAtWorkingPoint-1, nDiscriminatorBins+1)/IntegralLightJets 
-	 << ", " << TaggerDiscriminator[2]->Integral(BinAtWorkingPoint+1, nDiscriminatorBins+1)/IntegralLightJets << ")" << endl;
+	 << ", " << TaggerDiscriminator[2]->Integral(BinAtWorkingPoint+1, nDiscriminatorBins+1)/IntegralLightJets << ") over " << IntegralLightJets << endl;
     cout << "        Efficiency: " << TaggerDiscriminator[0]->Integral(BinAtWorkingPoint, nDiscriminatorBins+1)/IntegralBottomJets 
 	 << " (" << TaggerDiscriminator[0]->Integral(BinAtWorkingPoint-1, nDiscriminatorBins+1)/IntegralBottomJets 
-	 << ", " << TaggerDiscriminator[0]->Integral(BinAtWorkingPoint+1, nDiscriminatorBins+1)/IntegralBottomJets << ")" << endl;
+	 << ", " << TaggerDiscriminator[0]->Integral(BinAtWorkingPoint+1, nDiscriminatorBins+1)/IntegralBottomJets << ") over " << IntegralBottomJets << endl;
 
     int BinOldWorkingPoint = TaggerDiscriminator[2]->FindBin(OldWorkingPoint[wp]);
     cout << "        OldWorkingPoint " << OldWorkingPoint[wp] << " " 

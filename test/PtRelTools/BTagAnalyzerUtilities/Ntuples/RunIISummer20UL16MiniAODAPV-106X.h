@@ -1,5 +1,13 @@
 TString TreeContentFlag = "";
 
+// ttbar MC
+TString EOSPathttbar = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/XXX/";
+const int nttbarRanges = 1;
+TString ttbarRange[nttbarRanges] = { "hadronic" };
+int nttbarTrees[nttbarRanges] = { 0 };
+double CrossSectionttbar[nttbarRanges] = { 313.9 };
+double GeneratedEventsttbar[nttbarRanges] = { 0 };
+
 // QCDMu-APV MC
 TString EOSPathQCDMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIISummer19UL16MiniAODAPV-106X_mcRun2_asymptotic_preVFP_v8/";
 const int nMonteCarloPtHatRanges = 15;

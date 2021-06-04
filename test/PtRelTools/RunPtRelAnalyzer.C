@@ -24,8 +24,8 @@ void ExecComputeBTaggingWorkingPoints(TString AlgorithmName) {
 
   cout << "ExecComputeBTaggingWorkingPoints " << AlgorithmName << endl; 
 
-  bool UseQCD = (AlgorithmName.Contains("UseQCD")) ? true : false;
-  AlgorithmName.ReplaceAll("UseQCD", "");
+  bool UseQCD = (AlgorithmName.Contains("UseTTBar")) ? false : true;
+  AlgorithmName.ReplaceAll("UseTTBar", "");
 
   bool RemovePileUpJets = (AlgorithmName.Contains("RemovePU")) ? true : false;
   AlgorithmName.ReplaceAll("RemovePU", "");
@@ -108,7 +108,7 @@ void ExecProduceLightHistograms(TString DataType, int DataRange) {
 
    int nDataRanges;
   if (DataType=="JetHT") nDataRanges = nJetRunRanges;
-  if (DataType=="QCD") nDataRanges = nMCInclusivePtHatRanges - 4;
+  if (DataType=="QCD") nDataRanges = nMCInclusivePtHatRanges;
 
   for (int dr = 0; dr<nDataRanges; dr++) 
     if (DataRange==-999 || DataRange==dr)
@@ -165,7 +165,7 @@ void ExecCompareDataToMC(TString EtaBin, int Rebinning) {
   for (int nb = 0; nb<nPtRelEtaBins; nb++) {
     if (EtaBin.Contains(PtRelEtaBin[nb])) {
       
-      TString LightTemplates = "";//"All";
+      TString LightTemplates = "All";
       if (TemplateVariable=="System8") LightTemplates = "";
 
       ptRelAna->CompareDataToMC("jetPt",  PtRelEtaBin[nb], "All", Rebinning,   LightTemplates);
@@ -209,7 +209,7 @@ void ExecComputePtRelScaleFactors(TString Parameters = "CSVv2:_Central:") {
     } 
 
   } else {
-    
+ 
     ptRelAna->ComputePtRelScaleFactors(TaggerList, SystFit, FitOption, PlotOption, PtBinList, EtaBinFlag, TemplateFlag);
 
   }
@@ -315,7 +315,7 @@ void ExecPlotBTagPerformance(TString Dependence) {
       if (TaggerName[tg].Contains("Deep"))
         ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
 
-  }  else if (Dependence=="UL17RB2c") {
+  } else if (Dependence=="UL17") {
 
     TString ConfigurationList[2] = {"_PSRun2017UL17_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
     TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
@@ -323,6 +323,24 @@ void ExecPlotBTagPerformance(TString Dependence) {
     for (int tg = 0; tg<nTaggers; tg++)
       if (TaggerName[tg].Contains("Deep"))
         ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="UL18") {
+                                                                                      
+    TString ConfigurationList[2] = {"_PSRun2018UL18_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[4] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "_Central_LightTemplatesRatio_bTempRatioCorr", "_Central_LightTemplatesRatio_cJets", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++)
+      if (TaggerName[tg].Contains("Deep"))
+        ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "ScaleFactors");
+
+  } else if (Dependence=="Efficiency2018") {
+
+    TString ConfigurationList[3] = {"_PSRun2018Prompt18_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "_PSRun2018UL18_KinEtaAfterPtBinsCentral_LowPtAwayTrgConf", "-"};
+    TString SystematicList[2] = {"_Central_LightTemplatesRatio_cJets_bTempRatioCorr", "-"};
+
+    for (int tg = 0; tg<nTaggers; tg++)
+      if (TaggerName[tg].Contains("Deep"))
+        ptRelAna->PlotBTagPerformance(Dependence, TaggerName[tg], EtaList, ConfigurationList, SystematicList, 1070, DrawedSystematics, "Efficiency");
 
   }
   

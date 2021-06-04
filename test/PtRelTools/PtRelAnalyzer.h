@@ -4,14 +4,27 @@
 #include "TString.h"
 #include "TFile.h"
 
-#include "CampaignParameters/Run2018106X-UL18/BaseParameters.h"
-#include "CampaignParameters/Run2018106X-UL18/TriggerInfo.h"
-#include "CampaignParameters/Run2018106X-UL18/Taggers.h"
-#include "CampaignParameters/Run2018106X-UL18/Systematics.h"
+
+#include "CampaignParameters/Run2016106X-UL16APV/BaseParameters.h"
+#include "CampaignParameters/Run2016106X-UL16APV/TriggerInfo.h"
+#include "CampaignParameters/Run2016106X-UL16APV/Taggers.h"
+#include "CampaignParameters/Run2016106X-UL16APV/Systematics.h"
 
 // Choose the production 
-//#include "CampaignParameters/Run2018106X-UL18/BaseProduction.h"
-#include "CampaignParameters/Run2018106X-UL18/Run2016Production.h"
+#include "CampaignParameters/Run2016106X-UL16APV/BaseProduction.h"
+//#include "CampaignParameters/Run2016106X-UL16APV/Run2016Production.h"
+
+
+/*
+#include "CampaignParameters/Run2016106X-UL16/BaseParameters.h"
+#include "CampaignParameters/Run2016106X-UL16/TriggerInfo.h"
+#include "CampaignParameters/Run2016106X-UL16/Taggers.h"
+#include "CampaignParameters/Run2016106X-UL16/Systematics.h"
+
+// Choose the production
+#include "CampaignParameters/Run2016106X-UL16/BaseProduction.h"
+//#include "CampaignParameters/Run2016106X-UL16/Run2016Production.h"
+*/
   
 float TotalScaleFactorSystematic[nFitPtBins][nPtRelEtaBins];
 float ScaleFactorSystematic[nFitPtBins][nPtRelEtaBins][nScaleFactorSystematics];

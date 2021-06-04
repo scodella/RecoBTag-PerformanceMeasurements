@@ -8,8 +8,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "BTagAnalyzerUtilities/Ntuples/RunIISummer19UL18MiniAOD-106X.h"
-#include "BTagAnalyzerUtilities/Taggers/RunIISummer19UL18MiniAOD-106X.h"
+#include "BTagAnalyzerUtilities/Ntuples/RunIISummer20UL16MiniAODAPV-106X.h"
+#include "BTagAnalyzerUtilities/Taggers/RunIISummer20UL16MiniAODAPV-106X.h"
+//#include "BTagAnalyzerUtilities/Ntuples/RunIISummer20UL16MiniAOD-106X.h"
+//#include "BTagAnalyzerUtilities/Taggers/RunIISummer20UL16MiniAOD-106X.h"
 
 int Run, Evt, nPU, nPV, nTrkInc, nBHadrons, nDHadrons, nGenlep, nGenquark, nBitTrigger;
 int BitTrigger[100], Jet_flavour[50], Jet_nFirstTrkInc[50], Jet_nLastTrkInc[50], Muon_IdxJet[50]; 
@@ -899,7 +901,7 @@ bool PassTriggerBit(TString ThisCode, TString CampaignName, int TriggerPeriod = 
     if (ThisCode=="_PFJet140") triggerIdx =   3;
     if (ThisCode=="_PFJet260") triggerIdx =   5;
     
-  } else if (CampaignName=="UL17") {
+  } else if (CampaignName=="UL17" || CampaignName.Contains("UL16")) {
 
     if (ThisCode=="_DiJet20")  triggerIdx =  32;
     if (ThisCode=="_DiJet40")  triggerIdx =  33;
@@ -1397,16 +1399,19 @@ void ReadJetEnergyUncertainty(TString DataType, TString CorrectionVersion, TStri
     TString tok; Ssiz_t from = 0; const char* delim = "_";
     while (DataRangeName.Tokenize(tok, from, delim)) {
       if (tok.Contains("Run")) {
-	if (tok.Contains("A")) JEUFileName.ReplaceAll("RunXXX", "RunA");
-	if (tok.Contains("B")) JEUFileName.ReplaceAll("RunXXX", "RunB");
-	if (tok.Contains("C")) JEUFileName.ReplaceAll("RunXXX", "RunC");
-	if (tok.Contains("D")) JEUFileName.ReplaceAll("RunXXX", "RunD");
-	if (tok.Contains("E")) JEUFileName.ReplaceAll("RunXXX", "RunE");
-	if (tok.Contains("F")) JEUFileName.ReplaceAll("RunXXX", "RunF");
-	if (tok.Contains("G")) JEUFileName.ReplaceAll("RunXXX", "RunG");
-	if (tok.Contains("H")) JEUFileName.ReplaceAll("RunXXX", "RunH");
-	if (tok.Contains("I")) JEUFileName.ReplaceAll("RunXXX", "RunI");
-	if (tok.Contains("J")) JEUFileName.ReplaceAll("RunXXX", "RunJ");
+        if (tok.Contains("BCD"))      JEUFileName.ReplaceAll("RunXXX", "RunBCD");
+        else if (tok.Contains("EF"))  JEUFileName.ReplaceAll("RunXXX", "RunEF");
+        else if (tok.Contains("FGH")) JEUFileName.ReplaceAll("RunXXX", "RunFGH");
+	else if (tok.Contains("A"))   JEUFileName.ReplaceAll("RunXXX", "RunA");
+	else if (tok.Contains("B"))   JEUFileName.ReplaceAll("RunXXX", "RunB");
+	else if (tok.Contains("C"))   JEUFileName.ReplaceAll("RunXXX", "RunC");
+	else if (tok.Contains("D"))   JEUFileName.ReplaceAll("RunXXX", "RunD");
+	else if (tok.Contains("E"))   JEUFileName.ReplaceAll("RunXXX", "RunE");
+	else if (tok.Contains("F"))   JEUFileName.ReplaceAll("RunXXX", "RunF");
+	else if (tok.Contains("G"))   JEUFileName.ReplaceAll("RunXXX", "RunG");
+	else if (tok.Contains("H"))   JEUFileName.ReplaceAll("RunXXX", "RunH");
+	else if (tok.Contains("I"))   JEUFileName.ReplaceAll("RunXXX", "RunI");
+	else if (tok.Contains("J"))   JEUFileName.ReplaceAll("RunXXX", "RunJ");
       }
     }
   }

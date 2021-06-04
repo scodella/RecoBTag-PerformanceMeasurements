@@ -4,5 +4,4 @@ output                = JobOutput/out/PtRelAnalyzer.$(ClusterId).$(ProcId).out
 error                 = JobOutput/err/PtRelAnalyzer.$(ClusterId).$(ProcId).err
 log                   = JobOutput/log/PtRelAnalyzer.$(ClusterId).$(ProcId).log
 +JobFlavour           = "nextweek"
-requirements          = (OpSysAndVer =?= "SLCern6")
 queue                 NJOBS
