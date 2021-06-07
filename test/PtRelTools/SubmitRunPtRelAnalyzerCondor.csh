@@ -37,21 +37,24 @@ mkdir -p JobOutput/log
 #setenv MACRONAME 'EventCounterQCDMu' 
 #setenv NJOBS     1
 
-setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepCSV'
+#setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepCSV'
 #setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
-setenv NJOBS     1
+#setenv NJOBS     1
 
 #setenv MACRONAME 'ProduceHistogramsBTagMu'
-#setenv NJOBS     6
+#setenv NJOBS     5 
+#setenv NJOBS     3 
 
-#setenv MACRONAME 'ProduceHistogramsQCDMu'
-#setenv NJOBS     14
+setenv MACRONAME 'ProduceHistogramsQCDMu'
+setenv NJOBS     15
 
 #setenv MACRONAME 'ProduceLightHistogramsJetHT'
-#setenv NJOBS     6
+#setenv NJOBS     5
+#setenv NJOBS     3
 
 #setenv MACRONAME 'ProduceLightHistogramsQCD'
 #setenv NJOBS     22
+#setenv NJOBS     24
 
 cp RunPtRelAnalyzerCondor.sub RunPtRelAnalyzerCondor_$MACRONAME.sub
 
