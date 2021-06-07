@@ -1399,24 +1399,27 @@ void ReadJetEnergyUncertainty(TString DataType, TString CorrectionVersion, TStri
     TString tok; Ssiz_t from = 0; const char* delim = "_";
     while (DataRangeName.Tokenize(tok, from, delim)) {
       if (tok.Contains("Run")) {
-        if (tok.Contains("BCD"))      JEUFileName.ReplaceAll("RunXXX", "RunBCD");
-        else if (tok.Contains("EF"))  JEUFileName.ReplaceAll("RunXXX", "RunEF");
-        else if (tok.Contains("FGH")) JEUFileName.ReplaceAll("RunXXX", "RunFGH");
-	else if (tok.Contains("A"))   JEUFileName.ReplaceAll("RunXXX", "RunA");
-	else if (tok.Contains("B"))   JEUFileName.ReplaceAll("RunXXX", "RunB");
-	else if (tok.Contains("C"))   JEUFileName.ReplaceAll("RunXXX", "RunC");
-	else if (tok.Contains("D"))   JEUFileName.ReplaceAll("RunXXX", "RunD");
-	else if (tok.Contains("E"))   JEUFileName.ReplaceAll("RunXXX", "RunE");
-	else if (tok.Contains("F"))   JEUFileName.ReplaceAll("RunXXX", "RunF");
-	else if (tok.Contains("G"))   JEUFileName.ReplaceAll("RunXXX", "RunG");
-	else if (tok.Contains("H"))   JEUFileName.ReplaceAll("RunXXX", "RunH");
-	else if (tok.Contains("I"))   JEUFileName.ReplaceAll("RunXXX", "RunI");
-	else if (tok.Contains("J"))   JEUFileName.ReplaceAll("RunXXX", "RunJ");
+        if (CorrectionVersion.Contains("Summer19UL16")) {
+          if (tok.Contains("B") or tok.Contains("C") or tok.Contains("D"))      JEUFileName.ReplaceAll("RunXXX", "RunBCD");
+          else if (tok.Contains("E") or tok.Contains("F"))                      JEUFileName.ReplaceAll("RunXXX", "RunEF");
+          else if (tok.Contains("F") or tok.Contains("G") or tok.Contains("H")) JEUFileName.ReplaceAll("RunXXX", "RunFGH");
+        } else {
+          if (tok.Contains("A"))   JEUFileName.ReplaceAll("RunXXX", "RunA");
+	  else if (tok.Contains("B"))   JEUFileName.ReplaceAll("RunXXX", "RunB");
+	  else if (tok.Contains("C"))   JEUFileName.ReplaceAll("RunXXX", "RunC");
+	  else if (tok.Contains("D"))   JEUFileName.ReplaceAll("RunXXX", "RunD");
+	  else if (tok.Contains("E"))   JEUFileName.ReplaceAll("RunXXX", "RunE");
+	  else if (tok.Contains("F"))   JEUFileName.ReplaceAll("RunXXX", "RunF");
+	  else if (tok.Contains("G"))   JEUFileName.ReplaceAll("RunXXX", "RunG");
+	  else if (tok.Contains("H"))   JEUFileName.ReplaceAll("RunXXX", "RunH");
+	  else if (tok.Contains("I"))   JEUFileName.ReplaceAll("RunXXX", "RunI");
+	  else if (tok.Contains("J"))   JEUFileName.ReplaceAll("RunXXX", "RunJ");
+        }
       }
     }
   }
   ifstream JEUFile; JEUFile.open(JEUFileName);
-  
+ 
   if (!JEUFile)
     throw std::invalid_argument("JEU file not found!");
   

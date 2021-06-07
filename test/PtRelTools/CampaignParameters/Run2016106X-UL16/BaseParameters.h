@@ -1,5 +1,5 @@
 TString CampaignLuminosity = "16.8 fb^{-1} (13 TeV)";
-TString CampaignName       = "UL2016";
+TString CampaignName       = "UL16";
 
 TString JECVersionData = "Summer19UL16_RunXXX_V7";
 TString JECVersionMC   = "Summer19UL16_V7";
