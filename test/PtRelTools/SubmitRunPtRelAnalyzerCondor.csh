@@ -41,12 +41,12 @@ mkdir -p JobOutput/log
 #setenv MACRONAME 'ComputeBTaggingWorkingPointsDeepJet'
 #setenv NJOBS     1
 
-#setenv MACRONAME 'ProduceHistogramsBTagMu'
-#setenv NJOBS     5 
+setenv MACRONAME 'ProduceHistogramsBTagMu'
+setenv NJOBS     5 
 #setenv NJOBS     3 
 
-setenv MACRONAME 'ProduceHistogramsQCDMu'
-setenv NJOBS     15
+#setenv MACRONAME 'ProduceHistogramsQCDMu'
+#setenv NJOBS     15
 
 #setenv MACRONAME 'ProduceLightHistogramsJetHT'
 #setenv NJOBS     5

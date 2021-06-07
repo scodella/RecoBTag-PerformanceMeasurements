@@ -8,6 +8,7 @@ int nttbarTrees[nttbarRanges] = { 0 };
 double CrossSectionttbar[nttbarRanges] = { 313.9 };
 double GeneratedEventsttbar[nttbarRanges] = { 0 };
 
+/*
 // QCDMu-nonAPV MC
 TString EOSPathQCDMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAOD-106X_mcRun2_asymptotic_v13/";
 const int nMonteCarloPtHatRanges = 15;
@@ -15,9 +16,18 @@ TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = { "Pt-1000toInf", "Pt-120
 int nMonteCarloTrees[nMonteCarloPtHatRanges] = { 321, 365, 93, 655, 655, 449, 700, 700, 497, 439, 314, 468, 910, 910, 437 };
 double CrossSection[nMonteCarloPtHatRanges] = { 10.4305*0.15544, 469797.*0.05362, 1.27319E9*0.003, 117989.*0.07335, 117989.*0.07335, 5.58528E8*0.0053, 7820.25*0.10196, 7820.25*0.10196, 1.39803E8*0.01182, 645.528*0.12242, 1.92225E7*0.02276, 187.109*0.13412, 32.3486*0.14552, 32.3486*0.14552, 2.758420E6*0.03844 };
 double GeneratedEvents[nMonteCarloPtHatRanges] = { 14243204, 19830214, 3966021, 36800197, 36800197, 28515475, 30103401, 30103401, 35481419, 20185257, 22279218, 19553333, 41615643, 41615643, 23407998 };
+*/
+
+// QCDMu-nonAPV MC
+TString EOSPathQCDMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/QCD_MuEnrichedPt5_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAOD-106X_mcRun2_asymptotic_v13_fixTrg/";
+const int nMonteCarloPtHatRanges = 15;
+TString MonteCarloPtHatRange[nMonteCarloPtHatRanges] = { "Pt-1000toInf", "Pt-120to170", "Pt-15to20", "Pt-170to300:1of2", "Pt-170to300:2of2", "Pt-20to30", "Pt-300to470:1of2", "Pt-300to470:2of2", "Pt-30to50", "Pt-470to600", "Pt-50to80", "Pt-600to800", "Pt-800to1000:1of2", "Pt-800to1000:2of2", "Pt-80to120" };
+int nMonteCarloTrees[nMonteCarloPtHatRanges] = { 321, 365, 93, 655, 655, 449, 700, 700, 497, 439, 314, 468, 910, 910, 437 };
+double CrossSection[nMonteCarloPtHatRanges] = { 10.4305*0.15544, 469797.*0.05362, 1.27319E9*0.003, 117989.*0.07335, 117989.*0.07335, 5.58528E8*0.0053, 7820.25*0.10196, 7820.25*0.10196, 1.39803E8*0.01182, 645.528*0.12242, 1.92225E7*0.02276, 187.109*0.13412, 32.3486*0.14552, 32.3486*0.14552, 2.758420E6*0.03844 };
+double GeneratedEvents[nMonteCarloPtHatRanges] = { 14202400, 19830214, 3966021, 36800197, 36800197, 28515475, 30041015, 30041015, 35481419, 20185257, 22279218, 19488055, 41677403, 41677403, 23407998 };
 
 // BTagMu Data
-TString EOSPathBTagMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/Data/BTagMu_Run2016-21Feb2020_UL16/";
+TString EOSPathBTagMu = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/Data/BTagMu_Run2016-21Feb2020_UL16_fixTrg/";
 const int nBTagMuRanges = 3;
 TString BTagMuRangeName[nBTagMuRanges] = { "Run2016F", "Run2016G", "Run2016H" };
 int nBTagMuTrees[nBTagMuRanges] = { 25, 428, 475 };
