@@ -1399,9 +1399,10 @@ void ReadJetEnergyUncertainty(TString DataType, TString CorrectionVersion, TStri
     TString tok; Ssiz_t from = 0; const char* delim = "_";
     while (DataRangeName.Tokenize(tok, from, delim)) {
       if (tok.Contains("Run")) {
-        if (CorrectionVersion.Contains("Summer19UL16")) {
+        if (CorrectionVersion.Contains("Summer19UL16APV")) {
           if (tok.Contains("B") or tok.Contains("C") or tok.Contains("D"))      JEUFileName.ReplaceAll("RunXXX", "RunBCD");
           else if (tok.Contains("E") or tok.Contains("F"))                      JEUFileName.ReplaceAll("RunXXX", "RunEF");
+        } else if (CorrectionVersion.Contains("Summer19UL16")) {
           else if (tok.Contains("F") or tok.Contains("G") or tok.Contains("H")) JEUFileName.ReplaceAll("RunXXX", "RunFGH");
         } else {
           if (tok.Contains("A"))   JEUFileName.ReplaceAll("RunXXX", "RunA");
