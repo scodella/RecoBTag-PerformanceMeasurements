@@ -38,13 +38,22 @@ const int nJetRunRanges = 3;
 TString JetRunRangeName[nJetRunRanges] = { "Run2016F", "Run2016G", "Run2016H" };
 int nJetTrees[nJetRunRanges] = { 25, 429, 476 };
 
-// QCD MC
+/*// QCD MC
 TString EOSPathQCD = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/QCD_TuneCP5_13TeV_pythia8_RunIISummer19UL16MiniAOD-106X_mcRun2_asymptotic_v13/";
 const int nMCInclusivePtHatRanges = 24;
 TString MCInclusivePtHatRange[nMCInclusivePtHatRanges] = { "Pt-2400to3200", "Pt-30to50", "Pt-80to120", "Pt-170to300:1of2", "Pt-170to300:2of2", "Pt-50to80", "Pt-1400to1800", "Pt-600to800:1of4", "Pt-600to800:2of4", "Pt-600to800:3of4", "Pt-600to800:4of4", "Pt-1800to2400", "Pt-800to1000:1of2", "Pt-800to1000:2of2", "Pt-1000to1400", "Pt-470to600:1of2", "Pt-470to600:2of2", "Pt-300to470:1of3", "Pt-300to470:2of3", "Pt-300to470:3of3", "Pt-120to170:1of2", "Pt-120to170:2of2", "Pt-3200toInf", "Pt-15to30" };
 int nMCInclusiveTrees[nMCInclusivePtHatRanges] = { 101, 359, 547, 710, 710, 367, 186, 1767, 1767, 1767, 1767, 124, 966, 966, 572, 711, 711, 1407, 1407, 1407, 659, 659, 61, 279 };
 double CrossSectionInclusive[nMCInclusivePtHatRanges] = { 0.00682981, 1.40932E8, 2762530., 117276., 117276., 1.92043E7, 0.84265, 186.9, 186.9, 186.9, 186.9, 0.114943, 32.293, 32.293, 9.4183, 648.2, 648.2, 7823., 7823., 7823., 471100., 471100., 0.000165445, 1.83741E9 };
 double GeneratedEventsInclusive[nMCInclusivePtHatRanges] = { 1998000, 19995697, 29817598, 29931300, 29931300, 18694200, 5912000, 67845999, 67845999, 67845999, 67845999, 3000000, 39988000, 39988000, 19389000, 27487000, 27487000, 57804000, 57804000, 57804000, 29831600, 29831600, 799000, 19785997 };
+*/
+
+// QCD-nonAPV MC
+TString EOSPathQCD = "root://eoscms.cern.ch//eos/cms/store/group/phys_btag/performance/UL16/MC/QCD_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAOD-106X_mcRun2_asymptotic_v13/";
+const int nMCInclusivePtHatRanges = 21;
+TString MCInclusivePtHatRange[nMCInclusivePtHatRanges] = { "Pt-1000to1400", "Pt-120to170", "Pt-1400to1800", "Pt-15to30", "Pt-170to300", "Pt-1800to2400", "Pt-2400to3200", "Pt-300to470:1of3", "Pt-300to470:2of3", "Pt-300to470:3of3", "Pt-30to50", "Pt-3200toInf", "Pt-470to600:1of2", "Pt-470to600:2of2", "Pt-50to80", "Pt-600to800:1of3", "Pt-600to800:2of3", "Pt-600to800:3of3", "Pt-800to1000:1of2", "Pt-800to1000:2of2", "Pt-80to120" };
+int nMCInclusiveTrees[nMCInclusivePtHatRanges] = { 466, 441, 240, 232, 428, 137, 126, 1036, 1036, 1036, 295, 46, 967, 967, 263, 1225, 1225, 1225, 698, 698, 408 };
+double CrossSectionInclusive[nMCInclusivePtHatRanges] = { 9.4183, 471100., 0.84265, 1.83741E9, 117276., 0.114943, 0.00682981, 7823., 7823., 7823., 1.40932E8, 0.000165445, 648.2, 648.2, 1.92043E7, 186.9, 186.9, 186.9, 32.293, 32.293, 2762530. };
+double GeneratedEventsInclusive[nMCInclusivePtHatRanges] = { 19730000, 29737999, 10922000, 19909996, 29757999, 5492000, 2998000, 57590000, 57590000, 57590000, 19807997, 1000000, 52882000, 52882000, 19643999, 67628000, 67628000, 67628000, 37872000, 37872000, 29869998 };
 
 // https://github.com/cms-sw/cmssw/blob/CMSSW_10_6_X/SimGeneral/MixingModule/python/mix_2016_25ns_UltraLegacy_PoissonOOTPU_cfi.py
 float PileUpScenario[] = { 1.00402360149e-05, 5.76498797172e-05, 7.37891400294e-05, 0.000110932895295, 0.000158857714773,
